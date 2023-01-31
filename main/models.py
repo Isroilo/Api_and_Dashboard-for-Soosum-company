@@ -26,7 +26,7 @@ class Product(models.Model):
     is_sale = models.BooleanField(default=False)
 
 
-class About_Product(models.Model):
+class AboutProduct(models.Model):
     img = models.ImageField(upload_to="about_product/")
     text_uz = models.TextField()
     text_ru = models.TextField()
