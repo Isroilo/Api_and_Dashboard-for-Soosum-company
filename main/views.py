@@ -59,8 +59,8 @@ def advice_item_view(request):
 
 @api_view(['POST'])
 def order_add(request):
-    name = request.POST.get('name')
-    phone = request.POST.get('phone')
+    name = request.POST['name']
+    phone = request.POST['phone']
     new_order = Order.objects.create(
         name=name,
         phone=phone,

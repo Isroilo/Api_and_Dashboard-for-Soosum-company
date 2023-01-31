@@ -15,6 +15,8 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
 
+
+
 class Product(models.Model):
     name_uz = models.CharField(max_length=100)
     name_ru = models.CharField(max_length=100)

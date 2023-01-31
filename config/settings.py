@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #     own
     'main',
+    'dashboard',
     'rest_framework',
     'drf_yasg',
     'phone_field',
@@ -119,7 +120,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",
+}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
