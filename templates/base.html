@@ -22,6 +22,9 @@
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
 
+    <!--SWEET ALERT SCSS-->
+    <link id="style1" href="{% static 'assets/scss/plugins/_sweetalert.scss' %}" rel ="stylesheet" />
+
     <!-- STYLE CSS -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/dark-style.css' %}" rel="stylesheet" />
@@ -447,7 +450,7 @@
                                 <h3>Main</h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'home_url' %}"><i
                                         class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label">Dashboard</span></a>
                             </li>
@@ -485,6 +488,11 @@
 
         <!-- BACK-TO-TOP -->
         <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+        <!-- SWEET-ALERT JS -->
+        <script src="{% static 'assets/plugins/sweet-alert/sweetalert.min.js' %}"></script>
+        <script src="{% static 'assets/js/sweet-alert.js' %}"></script>
+
 
         <!-- JQUERY JS -->
         <script src="{% static 'assets/js/jquery.min.js' %}"></script>

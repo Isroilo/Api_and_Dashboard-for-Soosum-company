@@ -69,46 +69,45 @@ def banner_view(request):
 
 def create_banner(request):
     if request.method == "POST":
-        title_uz = request.POST.get('title_uz')
-        title_ru = request.POST.get('title_ru')
-        photo = request.POST.get('photo')
-        quality = request.POST.get('quality')
+        title_uz = request.POST['title_uz']
+        title_ru = request.POST['title_ru']
+        quality_uz = request.POST['quality_uz']
+        quality_ru = request.POST['quality_ru']
+        photo = request.FILES.get('photo')
         Banner.objects.create(
             title_uz=title_uz,
             title_ru=title_ru,
+            quality_uz=quality_uz,
+            quality_ru=quality_ru,
             photo=photo,
-            quality=quality,
         )
-        return redirect("banner_view")
-    return redirect("banner_view")
+        return redirect("banner_url")
+    return redirect("banner_url")
 
 
 def delete_banner(request, pk):
-    banner = Banner.objects.get(id=pk)
+    banner = Banner.objects.get(pk=pk)
     banner.delete()
-    return redirect("banner_view")
+    return redirect("banner_url")
 
 
 def change_banner(request, pk):
-    banner = Banner.objects.get(pk=pk)
-    context = {
-        "banner" : banner
-    }
     if request.method == 'POST':
-        title_uz = request.POST.get('title_uz')
+        banner = Banner.objects.get(pk=pk)
+        title_uz = request.POST['title_uz']
+        title_ru = request.POST['title_ru']
+        quality_uz = request.POST['quality_uz']
+        quality_ru = request.POST['quality_ru']
         photo = request.FILES.get('photo')
-        title_ru = request.POST.get('title_ru')
-        quality = request.POST.get('quality')
-        banner.title = title
-        if photo is not None:
-            banner.photo = photo
-        else:
-            pass
         banner.title_uz = title_uz
         banner.title_ru = title_ru
-        banner.quality = quality
+        banner.quality_uz = quality_uz
+        banner.quality_ru = quality_ru
+        if photo is not None:
+            banner.photo = photo
         banner.save()
-    return render(request, '', context)
+        return redirect("banner_url")
+    return redirect("banner_url")
 
 """ End Banner """
 """ Order """

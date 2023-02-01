@@ -8,6 +8,7 @@
                     <!-- CONTAINER -->
                     <div style="margin-top:2%;" class="main-container container-fluid">
                         				<div class="col-12">
+											{% if banner %}
 											<div class="card mb-3">
 											  <div class="row g-0">
 												  <div class="col-md-3" style="margin-top:10%;">
@@ -18,38 +19,70 @@
 														   <div class="col-sm-6 col-md-6 col-xl-3">
 															   <div class="row" style="margin-top:150px;margin-left:1px;margin-bottom:2px;">
 																	<div class="text-center d-flex">
-																	<button type="button" class="btn btn-icon  btn-info-light me-1 bradius" data-bs-target="#modaldemo1" data-bs-toggle="modal"><i class="fe fe-edit"></i></button>
-																		<div class="modal fade" id="modaldemo1">
+																	<button type="button" class="btn btn-icon  btn-info-light me-1 bradius" data-bs-target="#modaldemo{{ banner.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i></button>
+																		<div class="modal fade" id="modaldemo{{ banner.id }}">
 																		<div class="modal-dialog" style="margin-top:10%;" role="document">
 																			<div class="modal-content modal-content-demo">
 																				<div class="modal-header">
-																					<h6 class="modal-title">Message Preview</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																				</div>
-																				<div class="modal-body">
-																					<h6>Why We Use Electoral College, Not Popular Vote</h6>
-																					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-																						using 'Content here, content here', making it look like readable English.</p>
-																				</div>
-																				<div class="modal-footer">
-																					<button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+																				<div class="form" style="padding:10px;">
+																					<form action="{% url 'change_banner_url' banner.id %}" method="post" enctype="multipart/form-data" class="form-group">
+																						{% csrf_token %}
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Title uz</label>
+																							<div class="col-md-9">
+																								<input type="text" class="form-control" name="title_uz" value="{{ banner.title_uz }}" placeholder="enter title on uzbek" required>
+																							</div>
+																						</div>
+																						<div class="row mb-4">
+																							<label class="col-md-3 form-label" for="example-email">Title ru</label>
+																							<div class="col-md-9">
+																								<input type="text" value="{{ banner.title_ru }}" name="title_ru" class="form-control" placeholder="enter title on russian" required>
+																							</div>
+																						</div>
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Quality uz</label>
+																							<div class="col-md-9">
+																								<input type="text" class="form-control" name="quality_uz" value="{{ banner.quality_uz }}" placeholder="enter quality on uzbek" required>
+																							</div>
+																						</div>
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Quality ru</label>
+																							<div class="col-md-9">
+																								<input type="text" class="form-control" name="quality_ru" value="{{ banner.quality_ru }}" placeholder="enter quality on russian" required>
+																							</div>
+																						</div>
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Photo</label>
+																							<div class="col-md-9">
+																								<input type="file" class="form-control" name="photo" placeholder="select photo">
+																							</div>
+																						</div>
+																						<div class="modal-footer">
+																							<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																							<button type="submit" class="btn btn-primary">Save changes</button>
+																						</div>
+																					</form>
 																				</div>
 																			</div>
 																		</div>
 													</div>
-																	<button type="button" class="btn btn-icon  btn-danger-light me-1 bradius" data-bs-target="#modaldemo2" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
-																		<div class="modal fade" id="modaldemo2">
+																	<button type="button" class="btn btn-icon  btn-danger-light me-1 bradius" data-bs-target="#modaldemo-1" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
+																		<div class="modal fade" id="modaldemo-1">
 																		<div class="modal-dialog" style="margin-top:10%;" role="document">
 																			<div class="modal-content modal-content-demo">
-																				<div class="modal-header">
-																					<h6 class="modal-title">Message 1Preview</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-																				</div>
-																				<div class="modal-body">
-																					<h6>Why We Use Electoral College, Not Popular Vote</h6>
-																					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-																						using 'Content here, content here', making it look like readable English.</p>
-																				</div>
-																				<div class="modal-footer">
-																					<button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+																				<div class="form">
+																					<div class="modal-header">
+																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																					</div>
+																					<form action="{% url 'delete_banner_url' banner.id %}" method="post">
+																						{% csrf_token %}
+																							<div class="modal-footer">
+																							<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+																							<button type="submit" class="btn btn-danger">Yes</button>
+																							</div>
+																					</form>
 																				</div>
 																			</div>
 																		</div>
@@ -72,7 +105,57 @@
 																  </div>
 												 			</div>
 											  </div>
-											</div>
+											{% else %}
+											<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo1" data-bs-toggle="modal">Create Banner</button>
+													<div class="modal fade" id="modaldemo1">
+																		<div class="modal-dialog" style="margin-top:10%;" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="modal-header">
+																					<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																				</div>
+																				<div class="form" style="padding:10px;">
+																					<form action="{% url 'create_banner_url' %}" method="post" enctype="multipart/form-data" class="form-group">
+																						{% csrf_token %}
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Title uz</label>
+																							<div class="col-md-9">
+																								<input type="text" class="form-control" name="title_uz" placeholder="enter title on uzbek" required>
+																							</div>
+																						</div>
+																						<div class="row mb-4">
+																							<label class="col-md-3 form-label" for="example-email">Title ru</label>
+																							<div class="col-md-9">
+																								<input type="text" name="title_ru" class="form-control" placeholder="enter title on russian" required>
+																							</div>
+																						</div>
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Quality uz</label>
+																							<div class="col-md-9">
+																								<input type="text" class="form-control" name="quality_uz" placeholder="enter quality on uzbek" required>
+																							</div>
+																						</div>
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Quality ru</label>
+																							<div class="col-md-9">
+																								<input type="text" class="form-control" name="quality_ru" placeholder="enter quality on russian" required>
+																							</div>
+																						</div>
+																						<div class=" row mb-4">
+																							<label class="col-md-3 form-label">Photo</label>
+																							<div class="col-md-9">
+																								<input type="file" class="form-control" name="photo" placeholder="select photo" required>
+																							</div>
+																						</div>
+																						<div class="modal-footer">
+																							<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																							<button type="submit" class="btn btn-primary">Save changes</button>
+																						</div>
+																					</form>
+																				</div>
+																			</div>
+																		</div>
+													</div>
+											{% endif %}
 										</div>
                     </div>
                 </div>
