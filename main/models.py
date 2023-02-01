@@ -23,7 +23,7 @@ class Product(models.Model):
     name_ru = models.CharField(max_length=100)
     photo = models.ImageField(upload_to="products/")
     price = models.DecimalField(max_digits=25,decimal_places=2)
-    sale = models.DecimalField(max_digits=25,decimal_places=2)
+    sale = models.DecimalField(max_digits=25,decimal_places=2, null=True, blank=True)
     is_sale = models.BooleanField(default=False)
 
 

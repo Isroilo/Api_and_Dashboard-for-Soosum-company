@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+
+                    <!-- CONTAINER -->
+                    <div style="margin-top:2%;" class="main-container container-fluid">
+                        <!-- PAGE-HEADER -->
+						<div class="row">
+							<div class="col-10 page-header">
+								<h1 class="page-title">Products</h1>
+							</div>
+							<div class="col-2">
+							<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Add Product</button>
+								<div class="modal fade" id="modaldemo-3">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:10px;">
+																						<form action="{% url 'create_product_url' %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="">
+																														<div class="form-group">
+																															<label class="form-label">Name uz</label>
+																															<input type="text" class="form-control" name="name_uz" placeholder="Enter product name on uzbek" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Name ru</label>
+																															<input type="text" class="form-control" name="name_ru" placeholder="Enter product name on russian" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">How much</label>
+																															<input type="text" class="form-control" name="price" placeholder="Enter product price on old price" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">How much on sale</label>
+																															<input type="text" name="sale" class="form-control" placeholder="Enter product price on sale">
+																														</div>
+																														<div class="form-group">
+																															<input type="file" class="form-control" name="photo" placeholder="select photo">
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save</button>
+																															</div>
+																														</div>
+																													</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+							</div>
+						</div>
+                        <!-- PAGE-HEADER END -->
+
+                        <!-- ROW-1 OPEN -->
+                        <div class="row row-cards">
+                            <!-- COL-END -->
+                            <div class="col-xl-12 col-lg-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-11">
+                                        <div class="row">
+                                            {% for i in products %}
+                                            <div class="col-sm-6 col-md-6 col-xl-4 alert">
+                                                <div class="card">
+                                                    <div class="product-grid6">
+                                                        <div class="product-image6 p-3">
+															<div class="col-12" style="width:320px;height:300px;">
+                                                                <img src="{{ i.photo.url }}" width="100" height="100" alt="img">
+															</div>
+                                                        </div>
+                                                        <div class="card-body pt-0">
+                                                            <div class="product-content text-center">
+                                                                <h2 class="title fw-bold fs-20">{{ i.name_uz }}</h2>
+																<h2 class="title fw-bold fs-20">{{ i.name_ru }}</h2>
+                                                                <div class="price mb-2" style="margin-top:20px;">
+																	<h2>{{ i.price }}</h2>
+																	{% if i.is_sale %}
+																	<span class="ms-4">{{ i.sale }}</span>
+																	{% else %}
+																	<span class="ms-4"></span>
+																	{% endif %}
+																</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            <button type="button" class="btn btn-primary  btn-info-light" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> Edit</i></button>
+																		<div class="modal fade" id="modaleditproduct{{ i.id }}">
+																		<div class="col-8 modal-dialog" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="row">
+																					<div class="col-xl-12">
+																						<div class="card">
+																							<div class="card-body">
+																								<div class="row row-sm">
+																									<div class="col-xl-5 col-lg-12 col-md-12">
+																										<div class="card-body">
+																											<h1>Edit Product</h1>
+																										</div>
+																										<div class="row">
+																											<div class="col-xl-12">
+																												<div class="product-carousel">
+																													<div id="Slider" class="carousel slide border" data-bs-ride="false">
+																														<div class="carousel-inner">
+																															<div class="carousel-item active"><img src="{{ i.photo.url }}" alt="img" class="img-fluid mx-auto d-block">
+																																<div class="text-center mt-5 mb-5 btn-list">
+																																</div>
+																															</div>
+																														</div>
+																													</div>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																									<div class="col-md-12 col-xl-7">
+																										<div class="card">
+																											<div class="card-body">
+																												<form action="{% url 'change_product_url' i.id %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="">
+																														<div class="form-group">
+																															<label class="form-label">Name uz</label>
+																															<input type="text" class="form-control" name="name_uz" value="{{ i.name_uz }}" placeholder="Enter product name on uzbek" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Name ru</label>
+																															<input type="text" class="form-control" name="name_ru" value="{{ i.name_ru }}" placeholder="Enter product name on russian" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">How much</label>
+																															<input type="text" class="form-control" name="price" value="{{ i.price }}" placeholder="Enter product price on old price" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">How much on sale</label>
+																															<input type="text" name="sale" class="form-control" {% if i.is_sale %} value="{{ i.sale }}" {% endif %} placeholder="Enter product price on sale">
+																														</div>
+																														<div class="form-group">
+																															<input type="file" class="form-control" name="photo" placeholder="select photo">
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save changes</button>
+																															</div>
+																														</div>
+																													</div>
+																												</form>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+                        														</div>
+																			</div>
+																		</div>
+													</div>
+                                                            <button type="button" class="btn btn-danger" style="margin-top:5px;" data-bs-target="#modaldemo-2" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
+																		<div class="modal fade" id="modaldemo-2">
+																		<div class="modal-dialog" style="margin-top:10%;" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="form">
+																					<div class="modal-header">
+																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																					</div>
+																					<form action="{% url 'delete_product_url' i.id %}" method="post">
+																						{% csrf_token %}
+																							<div class="modal-footer">
+																							<button class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																							<button type="submit" class="btn btn-danger form">Yes</button>
+																							</div>
+																					</form>
+																				</div>
+																			</div>
+																		</div>
+																		</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+										{% if products.paginator.num_pages > 1 %}
+											<div class="card-footer d-flex justify-content-end">
+												<nav aria-label="Page navigation">
+													<ul class="pagination">
+														{% if products.has_previous %}
+															<li class="page-item">
+																<a class="page-link" href="?page={{products.previous_page_number }}">
+																	Previous
+																</a>
+															</li>
+														{% endif %}
+														{% for num in products.paginator.page_range %}
+														{% if num == products.number %}
+														<li class="page-item active">
+															<a class="page-link" href="#" tabindex="-1">{{ num }}</a>
+														</li>
+														{% elif num > products.number|add:'-2' and num < products.number|add:'2' %}
+														<li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+														{% endif %}
+														{% endfor %}
+														{% if products.has_next %}
+														<li class="page-item">
+															<a class="page-link" href="?page={{ products.next_page_number }}">
+																Next
+															</a>
+														</li>
+														{% endif %}
+													</ul>
+												</nav>
+											</div>
+										{% endif %}
+                                    </div>
+                                </div>
+                                <!-- COL-END -->
+                            </div>
+                            <!-- ROW-1 CLOSED -->
+                        </div>
+                        <!-- ROW-1 END-->
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+{% endblock content %}

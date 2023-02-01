@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+			<main class="content">
+				<button type="button" class="btn btn-success float-right mt-n1" data-toggle="modal" data-target="#centeredModalPrimary"><i class="fas fa-plus"></i> Infos</button>
+				<div class="modal fade" id="centeredModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Create new model</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												</div>
+														<form action="#" method="post" enctype="multipart/form-data">
+																	{% csrf_token %}
+																	<div class="row" style="padding:10px;">
+																		<div class="col-md-12">
+																			<div class="form-group">
+																			  <textarea class="form-control" name="info_uz" rows="1" placeholder="info_uz..." required></textarea>
+																			</div>
+																		</div>
+																		<div class="col-md-12">
+																			<div class="form-group">
+																			  <textarea class="form-control" name="info_ru" rows="1" placeholder="info_ru..." required></textarea>
+																			</div>
+																		</div>
+																		<div class="form-group" style="margin-left:30px;">
+																			<input type="file" name="photo">
+																		</div>
+																		<div class="col-md-12">
+																			<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																			<button type="submit" class="btn btn-primary">Save</button>
+																			</div>
+																		</div>
+																	</div>
+														</form>
+												</div>
+											</div>
+										</div>
+				<div class="container-fluid p-0">
+					<h1 class="h3 mb-3">About Project</h1>
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										{% for i in about_product %}
+										<div class="col-10" style="margin-left:250px;">
+											<div class="card mb-3">
+											  <div class="row g-0">
+												  <div class="col-md-4"style="margin-top:20px;">
+													  <div class="card-body">
+														<p class="h4">{{ i.text_uz }}</p>
+													  </div>
+												  </div>
+												  <div class="col-md-4" style="margin-top:20px;">
+													  <div class="card-body">
+														<p class="h4">{{ i.text_ru }}</p>
+													  </div>
+												  </div>
+												  <div class="col-md-4">
+													  <img src="{{ i.img.url }}" style="margin-top:40px;" class="img-fluid rounded-start" alt="...">
+												  </div>
+											  </div>
+												<div class="row mb-2 ml-2">
+													<form action="#">
+														<button class="btn btn-success"><i class="fas fa-check"></i></button>
+													</form>
+													<button type="button" class="btn btn-primary" style="margin-left:10px;" data-toggle="modal" data-target="#sizedModalMd{{i.id}}"><i class="fas fa-square"></i></button>
+													<div class="modal fade" id="sizedModalMd{{i.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+														<div class="modal-dialog modal-md" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title">Change active</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+																{% for x in active_projects %}
+																<form action="#" method="post">
+																	{% csrf_token %}
+																	<div class="row" style="padding:10px;">
+																		<div class="col-3">
+																			<h5>{{ x.info_uz }}</h5>
+																		</div>
+																		<div class="col-3">
+																			<h5>{{ x.info_ru }}</h5>
+																		</div>
+																		<div class="col-3">
+																			<img width="150" height="100" src="{{ x.photo.url }}">
+																		</div>
+																		<div class="col-1">
+																			<input type="hidden" name="modal_id" value="{{ x.id }}">
+																			<button type="submit" class="btn btn-danger" style="margin-top:40px;">-</button>
+																		</div>
+																	</div>
+																</form>
+																{% endfor %}
+															</div>
+														</div>
+													</div>
+													<form action="#">
+														<button class="btn btn-primary"><i class="fas fa-square"></i></button>
+													</form>
+													<button type="button" class="btn btn-warning"  style="margin-left:5px;" data-toggle="modal" data-target="#coloredModal{{i.id}}"><i class="fas fa-edit"></i></button>
+													<div class="modal modal-colored modal-warning fade" id="coloredModal{{i.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content" style="background-color:#fff;">
+																<div class="modal-header">
+																	<h3 class="modal-title" style="color:black;">Edit</h3>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																</div>
+																<form action="#" method="post" enctype="multipart/form-data">
+																	{% csrf_token %}
+																	<div class="row" style="padding:10px;">
+																		<div class="col-md-12">
+																			<div class="form-group">
+																				<label class="form-label">Text uz</label>
+																			  <textarea class="form-control" name="info_uz" rows="1" required>{{i.info_uz}}</textarea>
+																			</div>
+																		</div>
+																		<div class="col-md-12">
+																			<div class="form-group">
+																				<label class="form-label">Text ru</label>
+																			  <textarea class="form-control" name="info_ru" rows="1" required>{{i.info_ru}}</textarea>
+																			</div>
+																		</div>
+																		<div class="form-group" style="margin-left:30px;">
+																			<input type="file" name="photo">
+																		</div>
+																		</div>
+																		<div class="modal-footer">
+																		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+																		<input type="hidden" name="modal_id" value="{{ i.id }}">
+																		<button type="submit" class="btn btn-secondary">Save changes</button>
+																</div>
+																</form>
+															</div>
+														</div>
+													</div>
+													<button type="button" style="margin-left:5px;" class="btn btn-danger" data-toggle="modal" data-target="#coloredModal1{{i.id}}"><i class="fas fa-trash"></i></button>
+													<div class="modal fade" id="coloredModal1{{i.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered" style="width:400px" role="document">
+																	<div class="modal-content" style="background-color:#fff;">
+																		<div class="modal-header">
+																			<div class="row text-center">
+																					<h5 style="color:black;margin-left:40px;padding-top:18px;">I understand the consequences, delete this infos</h5>
+																			</div>
+																		</div>
+																		<form action="#" method="post">
+																			{% csrf_token %}
+																				<div class="modal-footer">
+																				<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+																				<button type="submit" class="btn btn-danger">Yes</button>
+																				</div>
+																		</form>
+																	</div>
+																</div>
+					</div>
+												</div>
+											</div>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+{% endblock content %}

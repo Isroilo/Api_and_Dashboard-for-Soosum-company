@@ -3,6 +3,7 @@ from main.models import *
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.db.models import Count
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import ExtractDay, ExtractMonth
 import calendar
 
@@ -152,61 +153,69 @@ def change_order(request, pk):
 
 """ End Order"""
 """ Product """
+def PagenatorPage(List, num ,request):
+    paginator = Paginator(List, num)
+    pages = request.GET.get('page')
+    try:
+        list = paginator.page(pages)
+    except PageNotAnInteger:
+        list = paginator.page(1)
+    except EmptyPage:
+        list = paginator.page(paginator.num_pages)
+    return list
 
 def product_view(request):
+    products = Product.objects.all().order_by('id')
     context = {
-        "product": Product.objects.all()
+        "products": PagenatorPage(products, 6, request)
     }
-    return render(request, '', context)
+    return render(request, 'products.html', context)
 
 
 def create_product(request):
     if request.method == "POST":
-        name_uz = request.POST.get('name_uz')
-        name_ru = request.POST.get('name_ru')
-        photo = request.FILES.get('photo')
-        price = request.POST.get('price')
+        name_uz = request.POST['name_uz']
+        name_ru = request.POST['name_ru']
+        photo = request.FILES['photo']
+        price = request.POST['price']
         sale = request.POST.get('sale')
-        is_sale = request.POST.get('is_sale')
-        Product.objects.create(
+        new_product = Product.objects.create(
             name_uz=name_uz,
             name_ru=name_ru,
             photo=photo,
             price=price,
             sale=sale,
-            is_sale=is_sale,
         )
-        return redirect("product_view")
-    return redirect("product_view")
+        if sale is not None:
+            new_product.is_sale=True
+            new_product.save()
+    return redirect("product_url")
 
 
 def delete_product(request, pk):
     product = Product.objects.get(id=pk)
     product.delete()
-    return redirect("product_view")
+    return redirect("product_url")
 
 
 def change_product(request, pk):
-    product = Product.objects.get(pk=pk)
-    context = {
-        "product": product
-    }
     if request.method == 'POST':
-        name_uz = request.POST.get('name_uz')
-        name_ru = request.POST.get('name_ru')
+        product = Product.objects.get(pk=pk)
+        name_uz = request.POST['name_uz']
+        name_ru = request.POST['name_ru']
         photo = request.FILES.get('photo')
-        price = request.POST.get('price')
-        sale = request.POST.get('sale')
-        is_sale = request.POST.get('is_sale')
+        price = float(request.POST.get('price'))
+        sale = float(request.POST.get('sale'))
         product.name_uz = name_uz
         product.name_ru = name_ru
-        if photo is not None:
-            product.photo = photo
         product.price = price
         product.sale = sale
-        product.is_sale = is_sale
+        if sale is not None:
+            product.is_sale = True
+        if photo is not None:
+            product.photo = photo
         product.save()
-    return render(request, '', context)
+    return redirect('product_url')
 
 """ End Product """
 
@@ -215,9 +224,9 @@ def change_product(request, pk):
 
 def about_product_view(request):
     context = {
-        "about_product": AboutProduct.objects.all()
+        "about_product": About_Product.objects.all().order_by('-id')
     }
-    return render(request, '', context)
+    return render(request, 'about-product.html', context)
 
 
 def create_about_product(request):
