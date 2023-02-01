@@ -5,6 +5,7 @@ from .views import *
 urlpatterns = [
     path("", home_view, name='home_url'),
     path('banner/', banner_view, name='banner_url'),
+    path('search-view/',search_view, name='search_view'),
     path('create-banner/', create_banner, name='create_banner_url'),
     path('delete-banner/<int:pk>/', delete_banner, name='delete_banner_url'),
     path('change-banner/<int:pk>/', change_banner, name='change_banner_url'),

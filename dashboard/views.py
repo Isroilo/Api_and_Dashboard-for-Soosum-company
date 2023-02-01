@@ -1,11 +1,29 @@
 from django.shortcuts import render, redirect
 from main.models import *
+from django.db.models import Q
 
 def home_view(request):
     return render(request, 'index.html')
 
 
+""" Search """
+
+
+def search_view(request):
+    if request.method == "POST":
+        search = request.POST['search']
+        info = Q(Q(name_uz__icontains=search) | Q(name_ru__icontains=search))
+        product = Product.objects.filter(info)
+        context = {
+            "search": product
+        }
+        return render(request, '', context)
+
+
+""" End Search """
 """ Banner """
+
+
 def banner_view(request):
     context = {
         "banner": Banner.objects.last()
