@@ -12,5 +12,6 @@ urlpatterns = [
     path("fact_title/", fact_title_view),
     path("fact_item/", fact_item_view),
     path("advice_item/", advice_item_view),
+    path("advice_title/", advice_title_view),
     path("info/", info_view),
 ]

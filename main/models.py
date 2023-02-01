@@ -6,7 +6,8 @@ class Banner(models.Model):
     title_uz = models.CharField(max_length=100)
     title_ru = models.CharField(max_length=100)
     photo = models.ImageField(upload_to="banner/")
-    quality = models.CharField(max_length=100)
+    quality_uz = models.CharField(max_length=100)
+    quality_ru = models.CharField(max_length=100)
 
 
 class Order(models.Model):
@@ -32,15 +33,15 @@ class About_Product(models.Model):
     text_ru = models.TextField()
 
 
-class Advice(models.Model):
-    name_uz = models.CharField(max_length=100)
-    name_ru = models.CharField(max_length=100)
+class Advice_Title(models.Model):
+    title_uz = models.CharField(max_length=100)
+    title_ru = models.CharField(max_length=100)
 
 
 class Advice_item(models.Model):
-    title_uz = models.CharField(max_length=100)
-    title_ru = models.CharField(max_length=100)
-    advices = models.ManyToManyField(Advice,blank=True)
+    advice_uz = models.CharField(max_length=100)
+    advice_ru = models.CharField(max_length=100)
+
 
 
 class About_Company(models.Model):

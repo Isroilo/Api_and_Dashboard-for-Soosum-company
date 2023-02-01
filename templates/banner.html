@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+
+                    <!-- CONTAINER -->
+                    <div style="margin-top:2%;" class="main-container container-fluid">
+                        				<div class="col-12">
+											<div class="card mb-3">
+											  <div class="row g-0">
+												  <div class="col-md-3" style="margin-top:10%;">
+													  <div class="card-body text-center">
+														  <p class="h6">{{ banner.quality_uz }}</p>
+														<h5 class="h5">{{ banner.title_uz }}</h5>
+													  </div>
+														   <div class="col-sm-6 col-md-6 col-xl-3">
+															   <div class="row" style="margin-top:150px;margin-left:1px;margin-bottom:2px;">
+																	<div class="text-center d-flex">
+																	<button type="button" class="btn btn-icon  btn-info-light me-1 bradius" data-bs-target="#modaldemo1" data-bs-toggle="modal"><i class="fe fe-edit"></i></button>
+																		<div class="modal fade" id="modaldemo1">
+																		<div class="modal-dialog" style="margin-top:10%;" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="modal-header">
+																					<h6 class="modal-title">Message Preview</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																				</div>
+																				<div class="modal-body">
+																					<h6>Why We Use Electoral College, Not Popular Vote</h6>
+																					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+																						using 'Content here, content here', making it look like readable English.</p>
+																				</div>
+																				<div class="modal-footer">
+																					<button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+																				</div>
+																			</div>
+																		</div>
+													</div>
+																	<button type="button" class="btn btn-icon  btn-danger-light me-1 bradius" data-bs-target="#modaldemo2" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
+																		<div class="modal fade" id="modaldemo2">
+																		<div class="modal-dialog" style="margin-top:10%;" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="modal-header">
+																					<h6 class="modal-title">Message 1Preview</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																				</div>
+																				<div class="modal-body">
+																					<h6>Why We Use Electoral College, Not Popular Vote</h6>
+																					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+																						using 'Content here, content here', making it look like readable English.</p>
+																				</div>
+																				<div class="modal-footer">
+																					<button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+																				</div>
+																			</div>
+																		</div>
+													</div>
+																	</div>
+															   </div>
+												  			</div>
+															<div class="col-sm-6 col-md-6 col-xl-3">
+
+																	  </div>
+																  </div>
+																  <div class="col-md-3" style="margin-top:10%;">
+																	  <div class="card-body text-center">
+																		  <p class="h6">{{ banner.quality_ru }}</p>
+																		<h5 class="h5">{{ banner.title_ru }}</h5>
+																	  </div>
+																  </div>
+																  <div class="col-md-6">
+																	  <img src="{{ banner.photo.url }}" style="border-radius:5px;" width="500" height="400" alt="...">
+																  </div>
+												 			</div>
+											  </div>
+											</div>
+										</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+{% endblock content %}

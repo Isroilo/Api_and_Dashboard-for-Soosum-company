@@ -10,7 +10,7 @@ def banner_view(request):
     context = {
         "banner": Banner.objects.last()
     }
-    return render(request, '', context)
+    return render(request, 'banner.html', context)
 
 
 def create_banner(request):

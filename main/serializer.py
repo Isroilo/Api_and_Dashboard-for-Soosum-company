@@ -24,9 +24,9 @@ class About_CompanySerializer(serializers.ModelSerializer):
         model = About_Company
         fields = "__all__"
 
-class AdviceSerializer(serializers.ModelSerializer):
+class Advice_TitleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Advice
+        model = Advice_Title
         fields = "__all__"
 
 class Advice_itemSerializer(serializers.ModelSerializer):
