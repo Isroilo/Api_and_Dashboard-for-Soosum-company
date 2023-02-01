@@ -1,8 +1,44 @@
 from django.shortcuts import render, redirect
 from main.models import *
 from django.db.models import Q
+from datetime import datetime, timedelta
+from django.db.models import Count
+from django.db.models.functions import ExtractDay, ExtractMonth
+import calendar
+
 
 def home_view(request):
+    order = Order.objects.all().order_by('-id')
+    count = Order.objects.all().count()
+    today = datetime.today() - timedelta(days=1)
+    month = datetime.today() - timedelta(days=30)
+    day = Order.objects.filter(created__gte=today).count()
+    months = Order.objects.filter(created__gte=month).count()
+    qs = Order.objects.filter(
+        created__gte=month
+    ).annotate(
+        day=ExtractDay("created"),
+        mon=ExtractMonth('created'),
+    ).values(
+        'day', 'mon'
+    ).annotate(
+        n=Count('pk')
+    ).order_by('mon')
+    mon_list = []
+    for i in qs:
+        i['mon'] = (calendar.month_abbr[i['mon']])
+        if len(mon_list) >= 30:
+            del mon_list[0]
+            mon_list.append(i)
+        else:
+            mon_list.append(i)
+    context = {
+        "all_apps": order,
+        "count": count,
+        "day": day,
+        "month": months,
+        "qs": mon_list,
+    }
     return render(request, 'index.html')
 
 
