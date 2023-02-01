@@ -204,50 +204,7 @@ def change_about_product(request, pk):
     return render(request, '', context)
 
 """ End About Product """
-""" Advice """
-
-def advice_view(request):
-    context = {
-        "advice": Advice.objects.all()
-    }
-    return render(request, '', context)
-
-
-def create_advice(request):
-    if request.method == "POST":
-        name_uz = request.POST.get('name_uz')
-        name_ru = request.POST.get('name_ru')
-        Advice.objects.create(
-            name_uz=name_uz,
-            name_ru=name_ru,
-        )
-        return redirect("advice_view")
-    return redirect("advice_view")
-
-
-def delete_advice(request, pk):
-    advice = Advice.objects.get(id=pk)
-    advice.delete()
-    return redirect("advice_view")
-
-
-def change_advice(request, pk):
-    advice = Advice.objects.get(pk=pk)
-    context = {
-        "advice": advice
-    }
-    if request.method == 'POST':
-        name_uz = request.POST.get('name_uz')
-        name_ru = request.POST.get('name_ru')
-        advice.name_uz = name_uz
-        advice.name_ru = name_ru
-        advice.save()
-    return render(request, '', context)
-
-
-""" End Advice """
-
-""" Advice_item  """
+""" Advice Item """
 
 
 def advice_item_view(request):
@@ -259,11 +216,11 @@ def advice_item_view(request):
 
 def create_advice_item(request):
     if request.method == "POST":
-        title_uz = request.POST.get('title_uz')
-        title_ru = request.POST.get('title_ru')
+        advice_uz = request.POST.get('advice_uz')
+        advice_ru = request.POST.get('advice_ru')
         Advice_item.objects.create(
-            title_uz=title_uz,
-            title_ru=title_ru,
+            advice_uz=advice_uz,
+            advice_ru=advice_ru,
         )
         return redirect("advice_item_view")
     return redirect("advice_item_view")
@@ -281,14 +238,58 @@ def change_advice_item(request, pk):
         "advice_item": advice_item
     }
     if request.method == 'POST':
-        title_uz = request.POST.get('title_uz')
-        title_ru = request.POST.get('title_ru')
-        advice_item.title_uz = title_uz
-        advice_item.title_ru = title_ru
+        advice_uz = request.POST.get('advice_uz')
+        advice_ru = request.POST.get('advice_ru')
+        advice_item.advice_uz = advice_uz
+        advice_item.advice_ru = advice_ru
         advice_item.save()
     return render(request, '', context)
 
+
 """ End Advice Item """
+
+""" Advice Title  """
+
+
+def advice_title_view(request):
+    context = {
+        "advice_title": Advice_Title.objects.all()
+    }
+    return render(request, '', context)
+
+
+def create_advice_title(request):
+    if request.method == "POST":
+        title_uz = request.POST.get('title_uz')
+        title_ru = request.POST.get('title_ru')
+        Advice_Title.objects.create(
+            title_uz=title_uz,
+            title_ru=title_ru,
+        )
+        return redirect("advice_title_view")
+    return redirect("advice_title_view")
+
+
+def delete_advice_title(request, pk):
+    advice_title = Advice_Title.objects.get(id=pk)
+    advice_title.delete()
+    return redirect("advice_title_view")
+
+
+def change_advice_title(request, pk):
+    advice_title = Advice_Title.objects.get(pk=pk)
+    context = {
+        "advice_title": advice_title
+    }
+    if request.method == 'POST':
+        title_uz = request.POST.get('title_uz')
+        title_ru = request.POST.get('title_ru')
+        advice_item.title_uz = title_uz
+        advice_title.title_ru = title_ru
+        advice_title.save()
+    return render(request, '', context)
+
+""" End Advice Title """
 """ About Company """
 
 
