@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from main.models import *
 from django.db.models import Q
+from django.db.models import F
 from datetime import datetime, timedelta
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import ExtractDay, ExtractMonth
 import calendar
+import decimal
 
 
 def home_view(request):
@@ -204,12 +206,13 @@ def change_product(request, pk):
         name_uz = request.POST['name_uz']
         name_ru = request.POST['name_ru']
         photo = request.FILES.get('photo')
-        price = float(request.POST.get('price'))
-        sale = float(request.POST.get('sale'))
+        price = request.POST.get('price')
+        sale = request.POST.get('sale')
         product.name_uz = name_uz
         product.name_ru = name_ru
         product.price = price
         product.sale = sale
+        t_list = []
         if sale is not None:
             product.is_sale = True
         if photo is not None:
@@ -231,39 +234,35 @@ def about_product_view(request):
 
 def create_about_product(request):
     if request.method == "POST":
-        img = request.FILES.get('img')
+        img = request.FILES.get('photo')
         text_uz = request.POST.get('text_uz')
         text_ru = request.POST.get('text_ru')
-        AboutProduct.objects.create(
+        About_Product.objects.create(
             img=img,
             text_uz=text_uz,
             text_ru=text_ru,
         )
-        return redirect("about_product_view")
-    return redirect("about_product_view")
+    return redirect("about_product_url")
 
 
 def delete_about_product(request, pk):
-    about_product = AboutProduct.objects.get(id=pk)
+    about_product = About_Product.objects.get(id=pk)
     about_product.delete()
-    return redirect("about_product_view")
+    return redirect("about_product_url")
 
 
 def change_about_product(request, pk):
-    about_product = AboutProduct.objects.get(pk=pk)
-    context = {
-        "about_product": about_product
-    }
     if request.method == 'POST':
-        img = request.POST.get('img')
+        about_product = About_Product.objects.get(pk=pk)
+        photo = request.FILES.get('photo')
         text_uz = request.POST.get('text_uz')
         text_ru = request.POST.get('text_ru')
-        if img is not None:
-            about_product.photo = photo
+        if photo is not None:
+            about_product.img = photo
         about_product.text_uz = text_uz
         about_product.text_ru = text_ru
         about_product.save()
-    return render(request, '', context)
+    return redirect("about_product_url")
 
 """ End About Product """
 """ Advice Item """

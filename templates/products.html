@@ -34,11 +34,11 @@
 																														</div>
 																														<div class="form-group">
 																															<label class="form-label">How much</label>
-																															<input type="text" class="form-control" name="price" placeholder="Enter product price on old price" required>
+																															<input type="number" class="form-control" name="price" min="0" value="0" step="any" placeholder="Enter product price on old price" required>
 																														</div>
 																														<div class="form-group">
 																															<label class="form-label">How much on sale</label>
-																															<input type="text" name="sale" class="form-control" placeholder="Enter product price on sale">
+																															<input type="number" name="sale" min="0" value="0" step="any" class="form-control" placeholder="Enter product price on sale">
 																														</div>
 																														<div class="form-group">
 																															<input type="file" class="form-control" name="photo" placeholder="select photo">
@@ -82,10 +82,11 @@
                                                                 <h2 class="title fw-bold fs-20">{{ i.name_uz }}</h2>
 																<h2 class="title fw-bold fs-20">{{ i.name_ru }}</h2>
                                                                 <div class="price mb-2" style="margin-top:20px;">
-																	<h2>{{ i.price }}</h2>
 																	{% if i.is_sale %}
-																	<span class="ms-4">{{ i.sale }}</span>
+																	<h2>{{ i.sale }}</h2>
+																	<span class="ms-4">{{ i.price }}</span>
 																	{% else %}
+																	<h2>{{ i.price }}</h2>
 																	<span class="ms-4"></span>
 																	{% endif %}
 																</div>
