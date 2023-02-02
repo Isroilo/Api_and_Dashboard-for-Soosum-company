@@ -40,7 +40,7 @@ def home_view(request):
         "month": months,
         "qs": mon_list,
     }
-    return render(request, 'index.html')
+    return render(request, 'index.html', context)
 
 
 """ Search """
