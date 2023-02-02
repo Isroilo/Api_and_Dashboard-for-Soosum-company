@@ -8,8 +8,28 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import ExtractDay, ExtractMonth
 import calendar
 import decimal
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        usr = authenticate(username=username, password=password)
+        if usr is not None:
+            login(request, usr)
+            return redirect("home_url")
+    return render(request, 'login.html')
+
+
+@login_required(login_url='login_url')
+def logout_view(request):
+    logout(request)
+    return redirect("login_url")
+
+
+@login_required(login_url='login_url')
 def home_view(request):
     order = Order.objects.all().order_by('-id')
     count = Order.objects.all().count()
@@ -48,6 +68,7 @@ def home_view(request):
 """ Search """
 
 
+@login_required(login_url='login_url')
 def search_view(request):
     if request.method == "POST":
         search = request.POST['search']
@@ -63,6 +84,7 @@ def search_view(request):
 """ Banner """
 
 
+@login_required(login_url='login_url')
 def banner_view(request):
     context = {
         "banner": Banner.objects.last()
@@ -70,6 +92,7 @@ def banner_view(request):
     return render(request, 'banner.html', context)
 
 
+@login_required(login_url='login_url')
 def create_banner(request):
     if request.method == "POST":
         title_uz = request.POST['title_uz']
@@ -88,12 +111,14 @@ def create_banner(request):
     return redirect("banner_url")
 
 
+@login_required(login_url='login_url')
 def delete_banner(request, pk):
     banner = Banner.objects.get(pk=pk)
     banner.delete()
     return redirect("banner_url")
 
 
+@login_required(login_url='login_url')
 def change_banner(request, pk):
     if request.method == 'POST':
         banner = Banner.objects.get(pk=pk)
@@ -112,9 +137,12 @@ def change_banner(request, pk):
         return redirect("banner_url")
     return redirect("banner_url")
 
+
 """ End Banner """
 """ Order """
 
+
+@login_required(login_url='login_url')
 def order_view(request):
     context = {
         "order": Order.objects.all()
@@ -122,6 +150,7 @@ def order_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_order(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -134,12 +163,14 @@ def create_order(request):
     return redirect("order_view")
 
 
+@login_required(login_url='login_url')
 def delete_order(request, pk):
     order = Order.objects.get(id=pk)
     order.delete()
     return redirect("order_view")
 
 
+@login_required(login_url='login_url')
 def change_order(request, pk):
     order = Order.objects.get(pk=pk)
     context = {
@@ -153,8 +184,11 @@ def change_order(request, pk):
         order.save()
     return render(request, '', context)
 
+
 """ End Order"""
 """ Product """
+
+
 def PagenatorPage(List, num ,request):
     paginator = Paginator(List, num)
     pages = request.GET.get('page')
@@ -166,6 +200,7 @@ def PagenatorPage(List, num ,request):
         list = paginator.page(paginator.num_pages)
     return list
 
+@login_required(login_url='login_url')
 def product_view(request):
     products = Product.objects.all().order_by('id')
     context = {
@@ -174,6 +209,7 @@ def product_view(request):
     return render(request, 'products.html', context)
 
 
+@login_required(login_url='login_url')
 def create_product(request):
     if request.method == "POST":
         name_uz = request.POST['name_uz']
@@ -194,12 +230,14 @@ def create_product(request):
     return redirect("product_url")
 
 
+@login_required(login_url='login_url')
 def delete_product(request, pk):
     product = Product.objects.get(id=pk)
     product.delete()
     return redirect("product_url")
 
 
+@login_required(login_url='login_url')
 def change_product(request, pk):
     if request.method == 'POST':
         product = Product.objects.get(pk=pk)
@@ -220,11 +258,12 @@ def change_product(request, pk):
         product.save()
     return redirect('product_url')
 
-""" End Product """
 
+""" End Product """
 """ About Product """
 
 
+@login_required(login_url='login_url')
 def about_product_view(request):
     context = {
         "about_product": About_Product.objects.all().order_by('-id')
@@ -232,6 +271,7 @@ def about_product_view(request):
     return render(request, 'about-product.html', context)
 
 
+@login_required(login_url='login_url')
 def create_about_product(request):
     if request.method == "POST":
         img = request.FILES.get('photo')
@@ -245,12 +285,14 @@ def create_about_product(request):
     return redirect("about_product_url")
 
 
+@login_required(login_url='login_url')
 def delete_about_product(request, pk):
     about_product = About_Product.objects.get(id=pk)
     about_product.delete()
     return redirect("about_product_url")
 
 
+@login_required(login_url='login_url')
 def change_about_product(request, pk):
     if request.method == 'POST':
         about_product = About_Product.objects.get(pk=pk)
@@ -268,6 +310,7 @@ def change_about_product(request, pk):
 """ Advice Item """
 
 
+@login_required(login_url='login_url')
 def advice_item_view(request):
     context = {
         "advice_item": Advice_item.objects.all()
@@ -275,6 +318,7 @@ def advice_item_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_advice_item(request):
     if request.method == "POST":
         advice_uz = request.POST.get('advice_uz')
@@ -287,12 +331,14 @@ def create_advice_item(request):
     return redirect("advice_item_view")
 
 
+@login_required(login_url='login_url')
 def delete_advice_item(request, pk):
     advice_item = Advice_item.objects.get(id=pk)
     advice_item.delete()
     return redirect("advice_item_view")
 
 
+@login_required(login_url='login_url')
 def change_advice_item(request, pk):
     advice_item = Advice_item.objects.get(pk=pk)
     context = {
@@ -312,6 +358,7 @@ def change_advice_item(request, pk):
 """ Advice Title  """
 
 
+@login_required(login_url='login_url')
 def advice_title_view(request):
     context = {
         "advice_title": Advice_Title.objects.all()
@@ -319,6 +366,7 @@ def advice_title_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_advice_title(request):
     if request.method == "POST":
         title_uz = request.POST.get('title_uz')
@@ -331,12 +379,14 @@ def create_advice_title(request):
     return redirect("advice_title_view")
 
 
+@login_required(login_url='login_url')
 def delete_advice_title(request, pk):
     advice_title = Advice_Title.objects.get(id=pk)
     advice_title.delete()
     return redirect("advice_title_view")
 
 
+@login_required(login_url='login_url')
 def change_advice_title(request, pk):
     advice_title = Advice_Title.objects.get(pk=pk)
     context = {
@@ -350,10 +400,12 @@ def change_advice_title(request, pk):
         advice_title.save()
     return render(request, '', context)
 
+
 """ End Advice Title """
 """ About Company """
 
 
+@login_required(login_url='login_url')
 def about_company_view(request):
     context = {
         "about_company": About_Company.objects.all()
@@ -361,6 +413,7 @@ def about_company_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_about_company(request):
     if request.method == "POST":
         title_uz = request.POST.get('title_uz')
@@ -379,12 +432,14 @@ def create_about_company(request):
     return redirect("about_company_view")
 
 
+@login_required(login_url='login_url')
 def delete_about_company(request, pk):
     about_company = About_Company.objects.get(id=pk)
     about_company.delete()
     return redirect("about_company_view")
 
 
+@login_required(login_url='login_url')
 def change_about_company(request, pk):
     about_company = About_Company.objects.get(pk=pk)
     context = {
@@ -405,10 +460,12 @@ def change_about_company(request, pk):
         about_company.save()
     return render(request, '', context)
 
-""" End About Company """
 
+""" End About Company """
 """ Instruction """
 
+
+@login_required(login_url='login_url')
 def instruction_view(request):
     context = {
         "instruction": Instruction.objects.all()
@@ -416,6 +473,7 @@ def instruction_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_instruction(request):
     if request.method == "POST":
         title_uz = request.POST.get('title_uz')
@@ -432,12 +490,14 @@ def create_instruction(request):
     return redirect("instruction_view")
 
 
+@login_required(login_url='login_url')
 def delete_instruction(request, pk):
     instruction = Instruction.objects.get(id=pk)
     instruction.delete()
     return redirect("instruction_view")
 
 
+@login_required(login_url='login_url')
 def change_instruction(request, pk):
     instruction = Instruction.objects.get(pk=pk)
     context = {
@@ -455,10 +515,12 @@ def change_instruction(request, pk):
         instruction.save()
     return render(request, '', context)
 
+
 """ End Instruction """
 """ Fact Title """
 
 
+@login_required(login_url='login_url')
 def fact_title_view(request):
     context = {
         "fact_title": Fact_Title.objects.all()
@@ -466,6 +528,7 @@ def fact_title_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_fact_title(request):
     if request.method == "POST":
         title_uz = request.POST.get('title_uz')
@@ -478,12 +541,14 @@ def create_fact_title(request):
     return redirect("fact_title_view")
 
 
+@login_required(login_url='login_url')
 def delete_fact_title(request, pk):
     fact_title = Fact_Title.objects.get(id=pk)
     fact_title.delete()
     return redirect("fact_title_view")
 
 
+@login_required(login_url='login_url')
 def change_fact_title(request, pk):
     fact_title = Fact_Title.objects.get(pk=pk)
     context = {
@@ -497,10 +562,12 @@ def change_fact_title(request, pk):
         fact_title.save()
     return render(request, '', context)
 
+
 """ End Fact Title """
 """ Fact_item  """
 
 
+@login_required(login_url='login_url')
 def fact_item_view(request):
     context = {
         "fact_item": Fact_item.objects.all()
@@ -508,6 +575,7 @@ def fact_item_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_fact_item(request):
     if request.method == "POST":
         description_uz = request.POST.get('description_uz')
@@ -522,12 +590,14 @@ def create_fact_item(request):
     return redirect("fact_item_view")
 
 
+@login_required(login_url='login_url')
 def delete_fact_item(request, pk):
     fact_item = Fact_item.objects.get(id=pk)
     fact_item.delete()
     return redirect("fact_item_view")
 
 
+@login_required(login_url='login_url')
 def change_fact_item(request, pk):
     fact_item = Fact_item.objects.get(pk=pk)
     context = {
@@ -543,10 +613,12 @@ def change_fact_item(request, pk):
         fact_item.save()
     return render(request, '', context)
 
+
 """ End Fact Item """
 """ Info """
 
 
+@login_required(login_url='login_url')
 def info_view(request):
     context = {
         "info": Info.objects.all()
@@ -554,6 +626,7 @@ def info_view(request):
     return render(request, '', context)
 
 
+@login_required(login_url='login_url')
 def create_info(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -578,12 +651,14 @@ def create_info(request):
     return redirect("info_view")
 
 
+@login_required(login_url='login_url')
 def delete_info(request, pk):
     info = Info.objects.get(id=pk)
     info.delete()
     return redirect("info_view")
 
 
+@login_required(login_url='login_url')
 def change_info(request, pk):
     info = Info.objects.get(pk=pk)
     context = {
