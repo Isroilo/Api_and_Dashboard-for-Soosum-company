@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						{% if about_company %}
+						<div class="col-xl-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-10" style="margin-left:250px;">
+											<div class="card mb-3">
+											  <div class="row g-0">
+												  <div class="col-md-4"style="margin-top:20px;">
+													  <div class="card-body">
+														  <h2>{{ about_company.title_uz }}</h2>
+														<p class="h4">{{ about_company.text_uz }}</p>
+													  </div>
+												  </div>
+												  <div class="col-md-4" style="margin-top:20px;">
+													  <div class="card-body">
+														  <h2>{{ about_company.title_ru }}</h2>
+														<p class="h4">{{ about_company.text_ru }}</p>
+													  </div>
+												  </div>
+												  <div class="col-md-4">
+													  <img src="{{ about_company.img.url }}" style="margin-top:40px;" width="300" height="600" class="img-fluid rounded-start" alt="...">
+												  </div>
+											  </div>
+												<div class="row mb-2 ml-2">
+													<div class="row" style="margin-left:1px;" >
+														<div class="text-center d-flex">
+														<button type="button" class="btn btn-icon  btn-info-light me-1 bradius" data-bs-target="#modaleditaboutcom{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i></button>
+															<div class="modal fade" id="modaleditaboutcom{{ i.id }}">
+																		<div class="col-8 modal-dialog" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="row">
+																					<div class="col-xl-12">
+																						<div class="card">
+																							<div class="card-body">
+																								<div class="row row-sm">
+																									<div class="col-xl-5 col-lg-12 col-md-12">
+																										<div class="card-body">
+																											<h1>Edit About Company</h1>
+																										</div>
+																										<div class="row">
+																											<div class="card center">
+																											<div class="col-xl-12" style="padding:5%;">
+																												<img src="{{ about_company.img.url }}" alt="img" width="600" height="1000" class="img-fluid mx-auto d-block">
+																											</div>
+																											</div>
+																										</div>
+																									</div>
+																									<div class="col-md-12 col-xl-7">
+																										<div class="card">
+																											<div class="card-body">
+																												<form action="{% url 'change_about_company_url' about_company.id %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="">
+																														<div class=" row mb-4">
+																															<label class="col-md-3 form-label">Title uz</label>
+																															<div class="col-md-9">
+																																<input type="text" class="form-control" name="title_uz" value="{{ about_company.title_uz }}" placeholder="enter title on uzbek" required>
+																															</div>
+																														</div>
+																														<div class=" row mb-4">
+																															<label class="col-md-3 form-label">Title ru</label>
+																															<div class="col-md-9">
+																																<input type="text" class="form-control" name="title_ru" value="{{ about_company.title_ru }}" placeholder="enter title on russian" required>
+																															</div>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="text_uz" rows="6" required>{{about_company.text_uz}}</textarea>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text ru</label>
+																															<textarea class="form-control" name="text_ru" rows="6" required>{{about_company.text_ru}}</textarea>
+																														</div>
+																														<div class="form-group">
+																															<input type="file" class="form-control" name="photo" placeholder="select photo">
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save changes</button>
+																															</div>
+																														</div>
+																													</div>
+																												</form>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+                        														</div>
+																			</div>
+																		</div>
+													</div>
+														<button type="button" class="btn btn-icon  btn-danger-light me-1 bradius" data-bs-target="#modaldemodelete{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
+															<div class="modal fade" id="modaldemodelete{{ i.id }}">
+																		<div class="modal-dialog" style="margin-top:10%;" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="form">
+																					<div class="modal-header">
+																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																					</div>
+																					<form action="{% url 'delete_about_company_url' about_company.id %}" method="post">
+																						{% csrf_token %}
+																							<div class="modal-footer">
+																							<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+																							<button type="submit" class="btn btn-danger">Yes</button>
+																							</div>
+																					</form>
+																				</div>
+																			</div>
+																		</div>
+													</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% else %}
+						<div class="row" style="margin-top:1%;">
+							<div class="col-10 page-header">
+								<h1 class="page-title">About Company</h1>
+							</div>
+							<div class="col-2">
+							<button type="button" style="margin-left:30px;" class="btn btn-icon  btn-info-light" data-bs-target="#modaleditcreate" data-bs-toggle="modal">Add About Company</button>
+								<div class="modal fade" id="modaleditcreate">
+																		<div class="col-5 modal-dialog" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="row">
+																					<div class="col-xl-12">
+																						<div class="card">
+																							<div class="card-body">
+																								<div class="row row-sm">
+																									<div class="col-md-12 col-xl-12">
+																										<h1>Create About Company</h1>
+																										<div class="card">
+																											<div class="card-body">
+																												<form action="{% url 'create_about_company_url' %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="form">
+																														<div class=" row mb-4">
+																															<label class="col-md-3 form-label">Title uz</label>
+																															<div class="col-md-9">
+																																<input type="text" class="form-control" name="title_uz" placeholder="enter title on uzbek" required>
+																															</div>
+																														</div>
+																														<div class=" row mb-4">
+																															<label class="col-md-3 form-label">Title ru</label>
+																															<div class="col-md-9">
+																																<input type="text" class="form-control" name="title_ru" placeholder="enter title on russian" required>
+																															</div>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="text_uz" rows="6" required></textarea>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text ru</label>
+																															<textarea class="form-control" name="text_ru" rows="6" required></textarea>
+																														</div>
+																														<div class="form-group">
+																															<input type="file" class="form-control" name="photo" placeholder="select photo" required>
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save</button>
+																															</div>
+																														</div>
+																													</div>
+																												</form>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+                        														</div>
+																			</div>
+																		</div>
+													</div>
+							</div>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</main>
+{% endblock content %}

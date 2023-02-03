@@ -408,9 +408,9 @@ def change_advice_title(request, pk):
 @login_required(login_url='login_url')
 def about_company_view(request):
     context = {
-        "about_company": About_Company.objects.all()
+        "about_company": About_Company.objects.last()
     }
-    return render(request, '', context)
+    return render(request, 'about_company.html', context)
 
 
 @login_required(login_url='login_url')
@@ -418,7 +418,7 @@ def create_about_company(request):
     if request.method == "POST":
         title_uz = request.POST.get('title_uz')
         title_ru = request.POST.get('title_ru')
-        img = request.FILES.get('img')
+        img = request.FILES.get('photo')
         text_uz = request.POST.get('text_uz')
         text_ru = request.POST.get('text_ru')
         About_Company.objects.create(
@@ -428,29 +428,25 @@ def create_about_company(request):
             text_uz=text_uz,
             text_ru=text_ru,
         )
-        return redirect("about_company_view")
-    return redirect("about_company_view")
+    return redirect("about_company_url")
 
 
 @login_required(login_url='login_url')
 def delete_about_company(request, pk):
-    about_company = About_Company.objects.get(id=pk)
+    about_company = About_Company.objects.get(pk=pk)
     about_company.delete()
-    return redirect("about_company_view")
+    return redirect("about_company_url")
 
 
 @login_required(login_url='login_url')
 def change_about_company(request, pk):
-    about_company = About_Company.objects.get(pk=pk)
-    context = {
-        "about_company": about_company
-    }
     if request.method == 'POST':
-        title_uz = request.POST.get('title_uz')
-        title_ru = request.POST.get('title_ru')
-        img = request.FILES.get('img')
-        text_uz = request.POST.get('text_uz')
-        text_ru = request.POST.get('text_ru')
+        about_company = About_Company.objects.get(pk=pk)
+        title_uz = request.POST['title_uz']
+        title_ru = request.POST['title_ru']
+        img = request.FILES.get('photo')
+        text_uz = request.POST['text_uz']
+        text_ru = request.POST['text_ru']
         about_company.title_uz = title_uz
         about_company.title_ru = title_ru
         if img is not None:
@@ -458,7 +454,7 @@ def change_about_company(request, pk):
         about_company.text_uz = text_uz
         about_company.text_ru = text_ru
         about_company.save()
-    return render(request, '', context)
+    return redirect('about_company_url')
 
 
 """ End About Company """

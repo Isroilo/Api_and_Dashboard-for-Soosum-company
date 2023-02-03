@@ -470,6 +470,10 @@
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'logout_url' %}"><i class="icon icon-basket-loaded"></i>
                                     <span style="margin-left:10px;" class="side-menu__label">Log Out</span></a>
                             </li>
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'about_company_url' %}"><i class="side-menu__icon fe fe-slack"></i>
+                                    <span style="margin-left:10px;" class="side-menu__label">About Company</span></a>
+                            </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                                 width="24" height="24" viewBox="0 0 24 24">
@@ -488,8 +492,7 @@
                 <div class="container">
                     <div class="row align-items-center flex-row-reverse">
                         <div class="col-md-12 col-sm-12 text-center">
-                            Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                                class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                            Company © <span id="year"></span> <a href="{% url 'home_url' %}">Soosum</a>
                         </div>
                     </div>
                 </div>
