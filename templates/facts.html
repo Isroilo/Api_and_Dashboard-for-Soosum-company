@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <div class="main-content mt-0">
+                <div class="side-app">
+
+                    <!-- CONTAINER -->
+                    <div style="margin-left:18%;margin-top:3%;" class="main-container">
+                        <div class="container">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+										<div class="col-6">
+                                        	<div class="card-title">Fact Title</div>
+										</div>
+										<div class="clo-6" style="margin-left:28%;">
+											{% if fact_title %}
+											<button type="button" class="btn btn-icon  btn-warning-light" style="margin-left:85px;margin-right:1px;" data-bs-target="#modaldemo{{ fact_title.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i>Edit</button>
+														<div class="modal fade" id="modaldemo{{ fact_title.id }}">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:10px;">
+																						<form action="{% url 'change_fact_title_url' fact_title.id %}" method="post" class="form-group">
+																							{% csrf_token %}
+																							<div class=" row mb-4">
+																								<label class="col-md-3 form-label">Title uz</label>
+																								<div class="col-md-9">
+																									<input type="text" class="form-control" name="title_uz" value="{{ fact_title.title_uz }}" placeholder="enter title on uzbek" required>
+																								</div>
+																							</div>
+																							<div class="row mb-4">
+																								<label class="col-md-3 form-label" for="example-email">Title ru</label>
+																								<div class="col-md-9">
+																									<input type="text" value="{{ fact_title.title_ru }}" name="title_ru" class="form-control" placeholder="enter title on russian" required>
+																								</div>
+																							</div>
+																							<div class="modal-footer">
+																								<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																								<button type="submit" class="btn btn-primary">Save changes</button>
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+											<button type="button" class="btn btn-icon  btn-danger-light" data-bs-target="#modaldemodelete" data-bs-toggle="modal"><i class="fe fe-trash"></i>Delete</button>
+														<div class="modal fade" id="modaldemodelete">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="form">
+																						<div class="modal-header">
+																							<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																						</div>
+																						<form action="{% url 'delete_fact_title_url' fact_title.id %}" method="post">
+																							{% csrf_token %}
+																								<div class="modal-footer">
+																								<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+																								<button type="submit" class="btn btn-danger">Yes</button>
+																								</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+											{% else %}
+											<button type="button" class="btn btn-success  btn-info-light" data-bs-target="#modaldemocreate" style="margin-left:200%;" data-bs-toggle="modal">Create</button>
+														<div class="modal fade" id="modaldemocreate">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:10px;">
+																						<form action="{% url 'create_fact_title_url' %}" method="post" class="form-group">
+																							{% csrf_token %}
+																							<div class=" row mb-4">
+																								<label class="col-md-3 form-label">Title uz</label>
+																								<div class="col-md-9">
+																									<input type="text" class="form-control" name="title_uz" placeholder="enter title on uzbek" required>
+																								</div>
+																							</div>
+																							<div class="row mb-4">
+																								<label class="col-md-3 form-label" for="example-email">Title ru</label>
+																								<div class="col-md-9">
+																									<input type="text" name="title_ru" class="form-control" placeholder="enter title on russian" required>
+																								</div>
+																							</div>
+																							<div class="modal-footer">
+																								<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																								<button type="submit" class="btn btn-primary">Save changes</button>
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+											{% endif %}
+										</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="customer-services mb-2 text-center">
+                                                    <h4>{{ fact_title.title_uz }}</h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="customer-services mb-2 text-center">
+                                                    <h4>{{ fact_title.title_ru }}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <span class="landing-title"></span>
+                                        <h2 class="text-center fw-semibold mb-7">Fact Items</h2>
+                                        {% for i in facts %}
+                                        <div class="col-lg-6">
+                                            <div class="card" style=height:85%;">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+														<div class="col-5">
+															<div class="card text-center" style="margin-top:3%;">
+																<h1 style="font-size:45px;margin-top:40px;">{{ i.number }}</h1>
+															</div>
+														</div>
+														<div class="col-7">
+															<div class="ps-3">
+																<div class="ps-3 row" >{{ i.description_uz }}</div>
+																<div style="margin-top:10%;" class="ps-3 row">{{ i.description_ru }}</div>
+															</div>
+														</div>
+                                                	</div>
+												<div class="row d-flex">
+													<div class="form d-flex" style="margin-left:80%;">
+														<a style="margin-right:7px;" data-bs-target="#modaldemoedit{{ i.id }}" data-bs-toggle="modal" href="">Edit</a>
+															<div class="modal fade" id="modaldemoedit{{ i.id }}">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Fact</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:10px;">
+																						<form action="{% url 'change_fact_item_url' i.id %}" method="post" class="form-group">
+																							{% csrf_token %}
+																							<div class="row mb-4">
+																								<label class="col-md-3 form-label" for="example-email">Facts on number</label>
+																								<div class="col-md-9">
+																									<input type="text" value="{{ i.number }}" name="number" class="form-control" placeholder="enter title on russian" required>
+																								</div>
+																							</div>
+																							<div class=" row mb-4">
+																								<label class="col-md-3 form-label">Description uz</label>
+																								<div class="col-md-9">
+																									<input type="text" class="form-control" name="description_uz" value="{{ i.description_uz }}" placeholder="enter quality on uzbek" required>
+																								</div>
+																							</div>
+																							<div class=" row mb-4">
+																								<label class="col-md-3 form-label">Description ru</label>
+																								<div class="col-md-9">
+																									<input type="text" class="form-control" name="description_ru" value="{{ i.description_ru }}" placeholder="enter quality on russian" required>
+																								</div>
+																							</div>
+																							<div class="modal-footer">
+																								<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																								<button type="submit" class="btn btn-primary">Save changes</button>
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+														<a data-bs-target="#modaldemodeleteitem" data-bs-toggle="modal" href="">Delete</a>
+															<div class="modal fade" id="modaldemodeleteitem">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="form">
+																						<div class="modal-header">
+																							<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																						</div>
+																						<form action="{% url 'delete_fact_item_url' i.id %}" method="post">
+																							{% csrf_token %}
+																								<div class="modal-footer">
+																								<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+																								<button type="submit" class="btn btn-danger">Yes</button>
+																								</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+														</div>
+												</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+{% endblock content %}

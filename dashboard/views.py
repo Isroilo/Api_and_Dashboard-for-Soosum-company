@@ -517,11 +517,12 @@ def change_instruction(request, pk):
 
 
 @login_required(login_url='login_url')
-def fact_title_view(request):
+def fact_view(request):
     context = {
-        "fact_title": Fact_Title.objects.all()
+        "facts": Fact_item.objects.all().order_by('-id'),
+        "fact_title": Fact_Title.objects.last()
     }
-    return render(request, '', context)
+    return render(request, 'facts.html', context)
 
 
 @login_required(login_url='login_url')
@@ -533,44 +534,30 @@ def create_fact_title(request):
             title_uz=title_uz,
             title_ru=title_ru,
             )
-        return redirect("fact_title_view")
-    return redirect("fact_title_view")
+    return redirect("fact_url")
 
 
 @login_required(login_url='login_url')
 def delete_fact_title(request, pk):
     fact_title = Fact_Title.objects.get(id=pk)
     fact_title.delete()
-    return redirect("fact_title_view")
+    return redirect("fact_url")
 
 
 @login_required(login_url='login_url')
 def change_fact_title(request, pk):
-    fact_title = Fact_Title.objects.get(pk=pk)
-    context = {
-        "fact_title": fact_title
-    }
     if request.method == 'POST':
+        fact_title = Fact_Title.objects.get(pk=pk)
         title_uz = request.POST.get('title_uz')
         title_ru = request.POST.get('title_ru')
         fact_title.title_uz = title_uz
         fact_title.title_ru = title_ru
         fact_title.save()
-    return render(request, '', context)
+    return redirect('fact_url')
 
 
 """ End Fact Title """
 """ Fact_item  """
-
-
-@login_required(login_url='login_url')
-def fact_item_view(request):
-    context = {
-        "fact_item": Fact_item.objects.all()
-    }
-    return render(request, '', context)
-
-
 @login_required(login_url='login_url')
 def create_fact_item(request):
     if request.method == "POST":
@@ -590,16 +577,13 @@ def create_fact_item(request):
 def delete_fact_item(request, pk):
     fact_item = Fact_item.objects.get(id=pk)
     fact_item.delete()
-    return redirect("fact_item_view")
+    return redirect("fact_url")
 
 
 @login_required(login_url='login_url')
 def change_fact_item(request, pk):
-    fact_item = Fact_item.objects.get(pk=pk)
-    context = {
-        "fact_item": fact_item
-    }
     if request.method == 'POST':
+        fact_item = Fact_item.objects.get(pk=pk)
         description_uz = request.POST.get('description_uz')
         description_ru = request.POST.get('description_ru')
         number = request.POST.get('number')
@@ -607,7 +591,7 @@ def change_fact_item(request, pk):
         fact_item.description_ru = description_ru
         fact_item.number = number
         fact_item.save()
-    return render(request, '', context)
+    return redirect('fact_url')
 
 
 """ End Fact Item """

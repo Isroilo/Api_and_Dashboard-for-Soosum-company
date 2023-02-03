@@ -67,7 +67,7 @@ class Fact_Title(models.Model):
 class Fact_item(models.Model):
     description_uz = models.CharField(max_length=100)
     description_ru = models.CharField(max_length=100)
-    number = models.FloatField()
+    number = models.CharField(max_length=100)
 
 
 class Info(models.Model):
