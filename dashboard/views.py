@@ -464,9 +464,9 @@ def change_about_company(request, pk):
 @login_required(login_url='login_url')
 def instruction_view(request):
     context = {
-        "instruction": Instruction.objects.all()
+        "instruction": Instruction.objects.last()
     }
-    return render(request, '', context)
+    return render(request, 'scroll.html', context)
 
 
 @login_required(login_url='login_url')
@@ -482,15 +482,15 @@ def create_instruction(request):
             text_uz=text_uz,
             text_ru=text_ru,
             )
-        return redirect("instruction_view")
-    return redirect("instruction_view")
+        return redirect("instruction_url")
+    return redirect("instruction_url")
 
 
 @login_required(login_url='login_url')
 def delete_instruction(request, pk):
     instruction = Instruction.objects.get(id=pk)
     instruction.delete()
-    return redirect("instruction_view")
+    return redirect("instruction_url")
 
 
 @login_required(login_url='login_url')
@@ -509,7 +509,8 @@ def change_instruction(request, pk):
         instruction.text_uz = text_uz
         instruction.text_ru = text_ru
         instruction.save()
-    return render(request, '', context)
+        return redirect("instruction_url")
+    return redirect("instruction_url")
 
 
 """ End Instruction """
@@ -603,7 +604,7 @@ def info_view(request):
     context = {
         "info": Info.objects.all()
     }
-    return render(request, '', context)
+    return render(request, 'scroll.html', context)
 
 
 @login_required(login_url='login_url')
