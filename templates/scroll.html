@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+            <!--/APP-SIDEBAR-->
+
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                        <div class="page-header">
+                            <h1 class="page-title">Instruction</h1>
+                            <div>
+                                <div class="col-2">
+							<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Add Product</button>
+								<div class="modal fade" id="modaldemo-3">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:10px;">
+																						<form action="{% url 'create_instruction_url' %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="">
+																														<div class="form-group">
+																															<label class="form-label">Title uz</label>
+																															<input type="text" class="form-control" name="title_uz" placeholder="Enter product title on uzbek" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Title ru</label>
+																															<input type="text" class="form-control" name="title_ru" placeholder="Enter product title on russian" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="text_uz" rows="6" required></textarea>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text Ru</label>
+																															<textarea class="form-control" name="text_ru" rows="6" required></textarea>
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save</button>
+																															</div>
+																														</div>
+																													</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+							</div>
+                            </div>
+                        </div>
+                        <!-- PAGE-HEADER END -->
+
+                        <!-- ROW-1 OPEN -->
+                        <div class="row" style="background-color:#fff;" >
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">{{ instruction.title_uz }}</div>
+                                    </div>
+                                    <div class="card-body scroll">
+                                        <!-- content -->
+                                        <div class="content vscroll h-300">
+                                            <p> {{ instruction.text_uz }} </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">{{ instruction.title_ru }}</div>
+                                    </div>
+                                    <div class="card-body scroll">
+                                        <!-- content -->
+                                        <div class="content-1 vscroll h-300">
+                                            <p>{{instruction.text_ru }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+							<div class="card">
+                            <div>
+ 								<button type="button" class="btn btn-danger" style="margin-top:5px;"
+										 data-bs-target="#modaldemo-2" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
+																		<div class="modal fade" id="modaldemo-2">
+																		<div class="modal-dialog" style="margin-top:5%;" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="form">
+																					<div class="modal-header">
+																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																					</div>
+																					<form action="{% url 'delete_instruction_url' instruction.pk %}" method="post">
+																						{% csrf_token %}
+																							<div class="modal-footer">
+																							<button class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																							<button type="submit" class="btn btn-danger form">Yes</button>
+																							</div>
+																					</form>
+																				</div>
+																			</div>
+																		</div>
+																		</div>
+									<button type="button" class="btn btn-icon  btn-info-light me-1 bradius" style="margin-top:5px;" data-bs-target="#modaleditabout{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i></button>
+															<div class="modal fade" id="modaleditabout{{ i.id }}">
+																		<div class="col-6 modal-dialog" role="document">
+																			<div class="modal-content modal-content-demo">
+																				<div class="row">
+																					<div class="col-xl-12">
+																						<div class="card">
+																							<div class="card-body">
+																								<div class="row row-sm">
+																									<div class="col-md-12">
+																										<div class="card">
+																											<div class="card-body">
+																												<form action="{% url 'change_instruction_url' instruction.pk %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="">
+																														<div class="form-group">
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="title_uz" rows="6" required>{{instruction.title_uz}}</textarea>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text ru</label>
+																															<textarea class="form-control" name="title_ru" rows="6" required>{{instruction.title_ru}}</textarea>
+																														</div>
+																														<div>
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="text_uz" rows="6" required>{{instruction.text_ru}}</textarea>
+																														</div>
+																														<div>
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="text_ru" rows="6" required>{{instruction.text_ru}}</textarea>
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save changes</button>
+																															</div>
+																														</div>
+																													</div>
+																												</form>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+                        														</div>
+																			</div>
+																		</div>
+													</div>
+
+							</div>
+                                </div>
+                        </div>
+                    </div>
+                    <!-- CONTAINER CLOSED -->
+                </div>
+            </div>
+            <!--app-content closed-->
+        </div>
+    </div>
+
+    <!-- BACK-TO-TOP -->
+
+
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/p-scroll/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'assets/plugins/p-scroll/pscroll-2.js' %}"></script>
+
+
+
+{% endblock %}
