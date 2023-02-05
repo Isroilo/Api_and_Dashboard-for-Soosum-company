@@ -602,9 +602,9 @@ def change_fact_item(request, pk):
 @login_required(login_url='login_url')
 def info_view(request):
     context = {
-        "info": Info.objects.all()
+        "info": Info.objects.last()
     }
-    return render(request, 'scroll.html', context)
+    return render(request, 'info.html', context)
 
 
 @login_required(login_url='login_url')
@@ -628,15 +628,15 @@ def create_info(request):
             youtube=youtube,
             facebook=facebook,
             )
-        return redirect("info_view")
-    return redirect("info_view")
+        return redirect("info_url")
+    return redirect("info_url")
 
 
 @login_required(login_url='login_url')
 def delete_info(request, pk):
-    info = Info.objects.get(id=pk)
+    info = Info.objects.get(pk=pk)
     info.delete()
-    return redirect("info_view")
+    return redirect("info_url")
 
 
 @login_required(login_url='login_url')
@@ -647,7 +647,7 @@ def change_info(request, pk):
     }
     if request.method == 'POST':
         name = request.POST.get('name')
-        logo = request.POST.get('logo')
+        logo = request.FILES.get('logo')
         description_uz = request.POST.get('description_uz')
         description_ru = request.POST.get('description_ru')
         telegram = request.POST.get('telegram')
@@ -664,7 +664,10 @@ def change_info(request, pk):
         info.youtube = youtube
         info.facebook = facebook
         info.save()
-    return render(request, '', context)
+        return redirect("info_url")
+
+    return redirect("info_url")
+
 
 
 """ End Info """

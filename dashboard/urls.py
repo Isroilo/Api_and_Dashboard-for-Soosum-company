@@ -49,5 +49,5 @@ urlpatterns = [
     path('info-view/', info_view, name='info_url'),
     path('create-info/', create_info, name='create_info_url'),
     path('delete-info/<int:pk>/', delete_info, name='delete_info_url'),
-    path('delete-info/<int:pk>/', delete_info, name='delete_info_url'),
+    path('change-info/<int:pk>/', change_info, name='change_info_url'),
 ]
