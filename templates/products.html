@@ -178,8 +178,12 @@
 																					<form action="{% url 'delete_product_url' i.id %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
-																							<button class="btn btn-success form" data-bs-dismiss="modal">No</button>
-																							<button type="submit" class="btn btn-danger form">Yes</button>
+																								<div class="form">
+																									<button class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																								</div>
+																								<div class="form">
+																									<button type="submit" class="btn btn-danger form">Yes</button>
+																								</div>
 																							</div>
 																					</form>
 																				</div>

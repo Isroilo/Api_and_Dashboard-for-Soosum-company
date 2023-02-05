@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
 from main.models import *
 from django.db.models import Q
-from django.db.models import F
 from datetime import datetime, timedelta
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import ExtractDay, ExtractMonth
 import calendar
-import decimal
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
@@ -48,17 +46,23 @@ def home_view(request):
         n=Count('pk')
     ).order_by('mon')
     mon_list = []
+    orders_list = []
     for i in qs:
         i['mon'] = (calendar.month_abbr[i['mon']])
+        orders_list.append(i['n'])
         if len(mon_list) >= 30:
             del mon_list[0]
             mon_list.append(i)
         else:
             mon_list.append(i)
+    m_num = max(orders_list)
+    l_num = min(orders_list)
     context = {
         "all_apps": order,
         "count": count,
         "day": day,
+        "m_num": m_num,
+        "l_num": l_num,
         "month": months,
         "qs": mon_list,
     }
@@ -141,13 +145,24 @@ def change_banner(request, pk):
 """ End Banner """
 """ Order """
 
+def PagenatorPage(List, num ,request):
+    paginator = Paginator(List, num)
+    pages = request.GET.get('page')
+    try:
+        list = paginator.page(pages)
+    except PageNotAnInteger:
+        list = paginator.page(1)
+    except EmptyPage:
+        list = paginator.page(paginator.num_pages)
+    return list
 
 @login_required(login_url='login_url')
 def order_view(request):
+    orders = Order.objects.all().order_by('-id')
     context = {
-        "order": Order.objects.all()
+        "orders": PagenatorPage(orders, 5, request)
     }
-    return render(request, '', context)
+    return render(request, 'order.html', context)
 
 
 @login_required(login_url='login_url')
@@ -159,30 +174,26 @@ def create_order(request):
             name=name,
             phone=phone,
         )
-        return redirect("order_view")
-    return redirect("order_view")
+    return redirect("order_url")
 
 
 @login_required(login_url='login_url')
 def delete_order(request, pk):
     order = Order.objects.get(id=pk)
     order.delete()
-    return redirect("order_view")
+    return redirect("order_url")
 
 
 @login_required(login_url='login_url')
 def change_order(request, pk):
-    order = Order.objects.get(pk=pk)
-    context = {
-        "order" : order
-    }
     if request.method == 'POST':
+        order = Order.objects.get(pk=pk)
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         order.name = name
         order.phone = phone
         order.save()
-    return render(request, '', context)
+    return redirect('order_url')
 
 
 """ End Order"""
@@ -308,16 +319,6 @@ def change_about_product(request, pk):
 
 """ End About Product """
 """ Advice Item """
-
-
-@login_required(login_url='login_url')
-def advice_item_view(request):
-    context = {
-        "advice_item": Advice_item.objects.all()
-    }
-    return render(request, '', context)
-
-
 @login_required(login_url='login_url')
 def create_advice_item(request):
     if request.method == "POST":
@@ -327,30 +328,26 @@ def create_advice_item(request):
             advice_uz=advice_uz,
             advice_ru=advice_ru,
         )
-        return redirect("advice_item_view")
-    return redirect("advice_item_view")
+    return redirect("advice_url")
 
 
 @login_required(login_url='login_url')
 def delete_advice_item(request, pk):
     advice_item = Advice_item.objects.get(id=pk)
     advice_item.delete()
-    return redirect("advice_item_view")
+    return redirect("advice_url")
 
 
 @login_required(login_url='login_url')
 def change_advice_item(request, pk):
-    advice_item = Advice_item.objects.get(pk=pk)
-    context = {
-        "advice_item": advice_item
-    }
     if request.method == 'POST':
+        advice_item = Advice_item.objects.get(pk=pk)
         advice_uz = request.POST.get('advice_uz')
         advice_ru = request.POST.get('advice_ru')
         advice_item.advice_uz = advice_uz
         advice_item.advice_ru = advice_ru
         advice_item.save()
-    return render(request, '', context)
+    return redirect('advice_url')
 
 
 """ End Advice Item """
@@ -359,11 +356,12 @@ def change_advice_item(request, pk):
 
 
 @login_required(login_url='login_url')
-def advice_title_view(request):
+def advice_view(request):
     context = {
-        "advice_title": Advice_Title.objects.all()
+        "advice_title": Advice_Title.objects.last(),
+        "advice_item": Advice_item.objects.all().order_by('-id'),
     }
-    return render(request, '', context)
+    return render(request, 'advice.html', context)
 
 
 @login_required(login_url='login_url')
@@ -375,30 +373,26 @@ def create_advice_title(request):
             title_uz=title_uz,
             title_ru=title_ru,
         )
-        return redirect("advice_title_view")
-    return redirect("advice_title_view")
+    return redirect("advice_url")
 
 
 @login_required(login_url='login_url')
 def delete_advice_title(request, pk):
     advice_title = Advice_Title.objects.get(id=pk)
     advice_title.delete()
-    return redirect("advice_title_view")
+    return redirect("advice_url")
 
 
 @login_required(login_url='login_url')
 def change_advice_title(request, pk):
-    advice_title = Advice_Title.objects.get(pk=pk)
-    context = {
-        "advice_title": advice_title
-    }
     if request.method == 'POST':
+        advice_title = Advice_Title.objects.get(pk=pk)
         title_uz = request.POST.get('title_uz')
         title_ru = request.POST.get('title_ru')
-        advice_item.title_uz = title_uz
+        advice_title.title_uz = title_uz
         advice_title.title_ru = title_ru
         advice_title.save()
-    return render(request, '', context)
+    return redirect("advice_url")
 
 
 """ End Advice Title """
@@ -460,7 +454,6 @@ def change_about_company(request, pk):
 """ End About Company """
 """ Instruction """
 
-
 @login_required(login_url='login_url')
 def instruction_view(request):
     context = {
@@ -516,7 +509,6 @@ def change_instruction(request, pk):
 """ End Instruction """
 """ Fact Title """
 
-
 @login_required(login_url='login_url')
 def fact_view(request):
     context = {
@@ -570,8 +562,8 @@ def create_fact_item(request):
             description_ru=description_ru,
             number=number,
             )
-        return redirect("fact_item_view")
-    return redirect("fact_item_view")
+    return redirect("fact_url")
+
 
 
 @login_required(login_url='login_url')

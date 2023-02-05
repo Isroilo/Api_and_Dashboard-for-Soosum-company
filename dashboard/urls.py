@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path , include
 from .views import *
 
 
@@ -6,12 +6,13 @@ urlpatterns = [
     path("home-view", home_view, name='home_url'),
     path('logout', logout_view, name='logout_url'),
     path('', login_view, name='login_url'),
+    path('excel/', include("excel_app.urls")),
     path('banner/', banner_view, name='banner_url'),
     path('search-view/',search_view, name='search_view'),
     path('create-banner/', create_banner, name='create_banner_url'),
     path('delete-banner/<int:pk>/', delete_banner, name='delete_banner_url'),
     path('change-banner/<int:pk>/', change_banner, name='change_banner_url'),
-    path('order-view/', order_view, name='order_view_url'),
+    path('order-view/', order_view, name='order_url'),
     path('create-order/', create_order, name='create_order_url'),
     path('delete-order/<int:pk>/', delete_order, name='delete_order_url'),
     path('change-order/<int:pk>/', change_order, name='change_order_url'),
@@ -23,11 +24,10 @@ urlpatterns = [
     path('create-about-product/', create_about_product, name='create_about_product_url'),
     path('delete-about-product/<int:pk>/', delete_about_product, name='delete_about_product_url'),
     path('change-about-product/<int:pk>/', change_about_product, name='change_about_product_url'),
-    path('advice-item-view/', advice_item_view, name='advice_item_url'),
     path('create-advice/', create_advice_item, name='create_advice_item_url'),
     path('delete-advice/<int:pk>/', delete_advice_item, name='delete_advice_item_url'),
     path('change-advice/<int:pk>/', change_advice_item, name='change_advice_item_url'),
-    path('advice-title-view/', advice_title_view, name='advice_title_url'),
+    path('advice/', advice_view, name='advice_url'),
     path('create-advice-title/', create_advice_title, name='create_advice_title_url'),
     path('delete-advice-title/<int:pk>/', delete_advice_title, name='delete_advice_title_url'),
     path('change-advice-title/<int:pk>/', change_advice_title, name='change_advice_title_url'),

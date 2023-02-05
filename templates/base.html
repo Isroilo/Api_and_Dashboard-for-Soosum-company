@@ -487,6 +487,14 @@
                                     <span style="margin-left:10px;" class="side-menu__label">Info</span></a>
                             </li>
 
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'advice_url' %}"><i class="icon icon-basket-loaded"></i>
+                                    <span style="margin-left:10px;" class="side-menu__label">Advice</span></a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'order_url' %}"><i class="icon icon-basket-loaded"></i>
+                                    <span style="margin-left:10px;" class="side-menu__label">Order</span></a>
+                            </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                                 width="24" height="24" viewBox="0 0 24 24">
@@ -572,6 +580,10 @@
         <script src="{% static 'assets/plugins/flot/jquery.flot.fillbetween.js' %}"></script>
         <script src="{% static 'assets/plugins/flot/chart.flot.sampledata.js' %}"></script>
         <script src="{% static 'assets/plugins/flot/dashboard.sampledata.js' %}"></script>
+
+        <script src="{% static 'assets/plugins/fullcalendar/moment.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/fullcalendar/fullcalendar.min.js' %}"></script>
+        <script src="{% static 'assets/js/fullcalendar.js' %}"></script>
 
         <!-- INTERNAL Vector js -->
         <script src="{% static 'assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>

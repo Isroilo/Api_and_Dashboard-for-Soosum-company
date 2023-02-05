@@ -2,26 +2,12 @@
 {% block content %}
 
         <!--app-content open-->
-            <div class="main-content app-content mt-0">
+<div class="main-content app-content mt-0" xmlns="http://www.w3.org/1999/html">
                 <div class="side-app">
-
                     <!-- CONTAINER -->
                     <div class="main-container container-fluid">
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <h1 class="page-title">Dashboard 01</h1>
-                            <div>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <!-- PAGE-HEADER END -->
-
                         <!-- ROW-1 -->
-                        <div class="row">
+                        <div class="row" style="margin-top:2%;">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xl-4">
@@ -91,7 +77,7 @@
 
                         <!-- ROW-2 -->
                         <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-9">
+                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Sales Analytics</h3>
@@ -105,66 +91,84 @@
                                            </div>
                                             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                                                 <script>
-                    const ctx = document.getElementById('myChart');
+                                                    const ctx = document.getElementById('myChart');
 
-                    new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                      labels: [{% for i in qs %} "{{ i.day }} {{ i.mon }}", {% endfor %}],
-                      datasets: [{
-                      label: '# of Votes',
-                      data: [{% for x in qs %} {{ x.n }}, {% endfor %}],
-                      borderWidth: 1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                      y: {
-                        beginAtZero: true
-                      }
-                      }
-                    }
-                    });
-                  </script>
+                                                    new Chart(ctx, {
+                                                    type: 'line',
+                                                    data: {
+                                                      labels: [{% for i in qs %} "{{ i.day }} {{ i.mon }}", {% endfor %}],
+                                                      datasets: [{
+                                                      label: '# of Votes',
+                                                      fill: true,
+                                                      tension: 0.3,
+                                                      data: [{% for x in qs %} {{ x.n }}, {% endfor %}],
+                                                      borderWidth: 1
+                                                      }]
+                                                    },
+                                                    options: {
+                                                      scales: {
+                                                      y: {
+                                                        beginAtZero: true
+                                                      }
+                                                      }
+                                                    }
+                                                    });
+                                                </script>
+
                                     </div>
                                 </div>
                             </div>
                             <!-- COL END -->
-                            <div class="col-sm-12 col-md-12 col-lg-13 col-xl-3">
-                                <div class="card overflow-hidden">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="card overflow-hidden" style="height:95%;">
                                     <div class="card-body pb-0 bg-recentorder">
-                                        <h3 class="card-title text-white">Recent Orders</h3>
+                                        <h3 class="card-title text-white text-center">Daily high and low orders for the last month</h3>
                                         <div class="chartjs-wrapper-demo">
                                             <canvas id="recentorders" class="chart-dropshadow"></canvas>
                                         </div>
                                     </div>
                                     <div id="flotback-chart" class="flot-background"></div>
                                     <div class="card-body">
-                                        <div class="d-flex mb-4 mt-4">
+                                        <div class="d-flex mb-4 mt-3">
                                             <div
                                                 class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
-                                                <i class="fe fe-check"></i>
+                                                <i class="fe fe-trending-up"></i>
                                             </div>
                                             <div class="">
-                                                <h6 class="mb-1 fw-semibold">Delivered Orders</h6>
-                                                <p class="fw-normal fs-12"> <span class="text-success">3.5%</span>
-                                                    increased </p>
+                                                <h6 class="mb-1 fw-semibold"></h6>
+                                                <p class="fw-normal fs-20"> <span class="text-success">{{ m_num }}</span>  Added</p>
                                             </div>
                                             <div class=" ms-auto my-auto">
-                                                <p class="fw-bold fs-20"> 1,768 </p>
+                                                <p class="fw-bold fs-15">{{ i.day }} {{ i.mon }}</p>
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
-                                                <i class="fe fe-x"></i>
+                                                <i class="fe fe-trending-down"></i>
                                             </div>
                                             <div class="">
-                                                <h6 class="mb-1 fw-semibold">Cancelled Orders</h6>
-                                                <p class="fw-normal fs-12"> <span class="text-success">1.2%</span>
-                                                    increased </p>
+                                                <h6 class="mb-1 fw-semibold"></h6>
+
                                             </div>
+                                            <p class="fw-normal fs-20"> <span class="text-success">{{ l_num }}</span>  Added</p>
                                             <div class=" ms-auto my-auto">
-                                                <p class="fw-bold fs-20 mb-0"> 3,675 </p>
+                                                <p class="fw-bold fs-15 mb-0">{{ i.day }} {{ i.mon }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Calender</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="external-events">
+                                                </div>
+                                                <div id='calendar2'></div>
                                             </div>
                                         </div>
                                     </div>
@@ -172,8 +176,6 @@
                             </div>
                             <!-- COL END -->
                         </div>
-
-                        <!-- ROW-4 END -->
                     </div>
                     <!-- CONTAINER END -->
                 </div>
@@ -669,91 +671,90 @@
                 </div>
             </div>
         </div>
-        <!--/Sidebar-right-->
+        /Sidebar-right
 
-        <!-- Country-selector modal-->
-<!--        <div class="modal fade" id="country-selector">-->
-<!--            <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--                <div class="modal-content country-select-modal">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"-->
-<!--                            data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <ul class="row p-3">-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">-->
-<!--                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"-->
-<!--                                            class="me-3 language"></span>USA-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/italy_flag.jpg"-->
-<!--                                        class="me-3 language"></span>Italy-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/spain_flag.jpg"-->
-<!--                                        class="me-3 language"></span>Spain-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/india_flag.jpg"-->
-<!--                                        class="me-3 language"></span>India-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/french_flag.jpg"-->
-<!--                                        class="me-3 language"></span>French-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/russia_flag.jpg"-->
-<!--                                        class="me-3 language"></span>Russia-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/germany_flag.jpg"-->
-<!--                                        class="me-3 language"></span>Germany-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt=""-->
-<!--                                        src="../assets/images/flags/argentina.jpg"-->
-<!--                                        class="me-3 language"></span>Argentina-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt="" src="../assets/images/flags/malaysia.jpg"-->
-<!--                                        class="me-3 language"></span>Malaysia-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="col-lg-6 mb-2">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">-->
-<!--                                    <span class="country-selector"><img alt="" src="../assets/images/flags/turkey.jpg"-->
-<!--                                        class="me-3 language"></span>Turkey-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!-- Country-selector modal-->
+         Country-selector modal
+        <div class="modal fade" id="country-selector">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content country-select-modal">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
+                            data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="row p-3">
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
+                                            class="me-3 language"></span>USA
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/italy_flag.jpg"
+                                        class="me-3 language"></span>Italy
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/spain_flag.jpg"
+                                        class="me-3 language"></span>Spain
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/india_flag.jpg"
+                                        class="me-3 language"></span>India
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/french_flag.jpg"
+                                        class="me-3 language"></span>French
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/russia_flag.jpg"
+                                        class="me-3 language"></span>Russia
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/germany_flag.jpg"
+                                        class="me-3 language"></span>Germany
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/argentina.jpg"
+                                        class="me-3 language"></span>Argentina
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/malaysia.jpg"
+                                        class="me-3 language"></span>Malaysia
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/turkey.jpg"
+                                        class="me-3 language"></span>Turkey
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 {% endblock %}
 

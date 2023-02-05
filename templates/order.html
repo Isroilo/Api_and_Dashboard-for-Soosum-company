@@ -1,0 +1,77 @@
+{% extends 'base.html'%}
+{% block content %}
+       <!-- Row -->
+      <div class="row">
+            <div class="col-xl-6" style="margin-left:20%;margin-top:2%;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Clients Table</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                            <p>Bu yerda barcha clientlar royhati</p>
+                            </div>
+                            <div class="col-3">
+                            <a style="margin-left:15%;margin-bottom:10%;" class="btn btn-success float-right mt-n1" href="{% url 'export_write_xls' %}"><i style="margin-right:5%;" class="fa fa-file-excel-o"></i> Export Exsel</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in orders %}
+                                    <tr class="text-center">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.phone }}</td>
+                                        <td>{{ i.created }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if orders.paginator.num_pages > 1 %}
+								<div class="card-footer d-flex justify-content-end">
+									<nav aria-label="Page navigation">
+										<ul class="pagination">
+											{% if orders.has_previous %}
+												<li class="page-item">
+													<a class="page-link" href="?page={{orders.previous_page_number }}">
+														Previous
+													</a>
+												</li>
+											{% endif %}
+											{% for num in orders.paginator.page_range %}
+											{% if num == orders.number %}
+											<li class="page-item active">
+												<a class="page-link" href="#" tabindex="-1">{{ num }}</a>
+											</li>
+											{% elif num > orders.number|add:'-2' and num < orders.number|add:'2' %}
+											<li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+											{% endif %}
+											{% endfor %}
+											{% if orders.has_next %}
+											<li class="page-item">
+												<a class="page-link" href="?page={{ orders.next_page_number }}">
+													Next
+												</a>
+											</li>
+											{% endif %}
+										</ul>
+									</nav>
+								</div>
+							{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+       <!-- End Row -->
+{% endblock content %}
