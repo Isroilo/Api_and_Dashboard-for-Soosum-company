@@ -9,55 +9,15 @@
                     <div style="margin-top:2%;" class="main-container container-fluid">
                         <!-- PAGE-HEADER -->
 						<div class="row">
+                          {% if search.first %}
 							<div class="col-10 page-header">
-								<h1 class="page-title">Products</h1>
+								<h1 class="page-title">Qidiruch bo'yicha topildi</h1>
 							</div>
-							<div class="col-2">
-							<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Add Product</button>
-								<div class="modal fade" id="modaldemo-3">
-																			<div class="modal-dialog" style="margin-top:10%;" role="document">
-																				<div class="modal-content modal-content-demo">
-																					<div class="modal-header">
-																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-																					</div>
-																					<div class="form" style="padding:10px;">
-																						<form action="{% url 'create_product_url' %}" method="post" enctype="multipart/form-data">
-																													{% csrf_token %}
-																													<div class="">
-																														<div class="form-group">
-																															<label class="form-label">Name uz</label>
-																															<input type="text" class="form-control" name="name_uz" placeholder="Enter product name on uzbek" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Name ru</label>
-																															<input type="text" class="form-control" name="name_ru" placeholder="Enter product name on russian" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">How much</label>
-																															<input type="number" class="form-control" name="price" min="0" value="0" step="any" placeholder="Enter product price on old price" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">How much on sale</label>
-																															<input type="number" name="sale" min="0" value="0" step="any" class="form-control" placeholder="Enter product price on sale">
-																														</div>
-																														<div class="form-group">
-																															<input type="file" class="form-control" name="photo" placeholder="select photo">
-																														</div>
-																														<div class="modal-footer" style="margin-top:10px;">
-																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																															</div>
-																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save</button>
-																															</div>
-																														</div>
-																													</div>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-														</div>
+                          {% else %}
+                            <div class="col-10 page-header">
+								<h1 class="page-title">Qidiruch bo'yicha Hech qanday mahsulot topilmadi</h1>
 							</div>
+                          {% endif %}
 						</div>
                         <!-- PAGE-HEADER END -->
 
@@ -68,7 +28,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab-11">
                                         <div class="row">
-                                            {% for i in products %}
+                                            {% for i in search %}
                                             <div class="col-sm-6 col-md-6 col-xl-4 alert">
                                                 <div class="card">
                                                     <div class="product-grid6">

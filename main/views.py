@@ -44,18 +44,16 @@ def fact_title_view(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def advice_title_view(request):
-    advice_title = Advice_Title.objects.all().order_by('-id')
-    serializer = Advice_TitleSerializer(advice_title, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
 def fact_item_view(request):
     facts = Fact_item.objects.all().order_by('id')
     serializer = Fact_itemSerializer(facts, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def advice_title_view(request):
+    advice_title = Advice_Title.objects.all().order_by('-id')
+    serializer = Advice_TitleSerializer(advice_title, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def advice_item_view(request):

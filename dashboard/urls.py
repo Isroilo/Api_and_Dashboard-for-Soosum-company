@@ -3,13 +3,13 @@ from .views import *
 
 
 urlpatterns = [
-    path("home", home_view, name='home_url'),
+    path("", home_view, name='home_url'),
     path('logout', logout_view, name='logout_url'),
     path('user/update/', user_update, name='user_update_url'),
-    path('', login_view, name='login_url'),
+    path('log-in', login_view, name='login_url'),
     path('excel/', include("excel_app.urls")),
     path('banner/', banner_view, name='banner_url'),
-    path('search/',search_view, name='search_view'),
+    path('search/',search_view, name='search_url'),
     path('create-banner/', create_banner, name='create_banner_url'),
     path('delete-banner/<int:pk>/', delete_banner, name='delete_banner_url'),
     path('change-banner/<int:pk>/', change_banner, name='change_banner_url'),

@@ -2,252 +2,255 @@
 {% block content %}
 {% load static %}
 
-
-   <div class="main-content app-content mt-0">
-                <div class="side-app">
-
+   <div class="main-content app-content mt-5">
                     <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-						{% if info %}
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <h1 class="page-title">INFO</h1>
-
-                            <div>
-
-                            </div>
-                        </div>
-                        <!-- PAGE-HEADER END -->
-
-                        <!-- Row -->
-                        <div class="row row-sm" >
-                            <div class="col-xl-7 col-lg-12 col-md-12">
-                                <div class="card custom-card overflow-hidden">
-                                    <div class="card-body p-3">
-                                        <a href="javascript:void(0)"><img src="{{ info.logo.url  }}" alt="img" class="br-5 w-100"  height="450" ></a>
-                                    </div>
-                                </div>
-<!--                               -->
-                            </div>
-                            <div class="col-xl-5 col-lg-12 col-md-12">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <h5 class="mb-3">Info Details</h5>
-                                        <div class="">
-                                            <div class="row">
-                                                <div class="col-xl-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table mb-0 table-bordered text-nowrap">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th>Name</th>
-                                                                    <td>{{ info.name }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Telegram</th>
-                                                                    <td>{{ info.telegram }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Instagram</th>
-                                                                    <td>{{ info.instagram }}</td>
-                                                                </tr>
-                                                                {% if info.description_uz or description_ru %}
-                                                                    <tr>
-                                                                        <th>Description uz</th>
-                                                                        <td>{{ info.description_uz }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Description Ru</th>
-                                                                        <td>{{ info.description_ru  }}</td>
-                                                                    </tr>
-                                                                {% endif %}
-                                                                <tr>
-                                                                    <th>Youtube</th>
-                                                                    <td>{{ info.youtube }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Facebook</th>
-                                                                    <td>{{ info.facebook }}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="mt-5 text-center">
-                                                         <button type="button" class="btn btn-danger" style="margin-top:5px;" data-bs-target="#modaldemo-2" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
-																		<div class="modal fade" id="modaldemo-2">
-																		<div class="modal-dialog" style="margin-top:10%;" role="document">
-																			<div class="modal-content modal-content-demo">
-																				<div class="form">
-																					<div class="modal-header">
-																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
-																					</div>
-																					<form action="{% url 'delete_info_url' info.pk %}" method="post">
-																						{% csrf_token %}
-																							<div class="modal-footer">
-																							<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
-																							<button type="submit" class="btn btn-danger form">Yes</button>
-																							</div>
-																					</form>
+       <div class="main-container container-fluid">
+		{% if info %}
+			<div class="col-12">
+			<div class="card mb-3">
+				<div style="margin-left:3%;" class="page-header">
+				<h1 class="page-title">INFO</h1>
+				</div>
+				<div class="row g-0">
+				<div class="col-xl-6 col-lg-6 col-md-6">
+					<div class="card custom-card">
+						<div class="card-body">
+							<h5 class="mb-3">Info Details</h5>
+							<div class="">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="table-responsive">
+											<table class="table mb-0 table-bordered text-nowrap">
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>{{ info.name }}</td>
+													</tr>
+													<tr>
+														<th>Telegram</th>
+														<td>{{ info.telegram }}</td>
+													</tr>
+													<tr>
+														<th>Instagram</th>
+														<td>{{ info.instagram }}</td>
+													</tr>
+													{% if info.description_uz or description_ru %}
+														<tr>
+															<th>Description uz</th>
+															<td>{{ info.description_uz }}</td>
+														</tr>
+														<tr>
+															<th>Description Ru</th>
+															<td>{{ info.description_ru  }}</td>
+														</tr>
+													{% endif %}
+													<tr>
+														<th>Youtube</th>
+														<td>{{ info.youtube }}</td>
+													</tr>
+													<tr>
+														<th>Facebook</th>
+														<td>{{ info.facebook }}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="mt-5">
+										 <button type="button" class="btn btn-danger" style="margin-top:5px;" data-bs-target="#modaldemo-2" data-bs-toggle="modal"><i class="fe fe-trash"></i></button>
+											<div class="modal fade" id="modaldemo-2">
+											<div class="modal-dialog" style="margin-top:10%;" role="document">
+												<div class="modal-content modal-content-demo">
+													<div class="form">
+														<div class="modal-header">
+															<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+														</div>
+														<form action="{% url 'delete_info_url' info.pk %}" method="post">
+															{% csrf_token %}
+																<div class="modal-footer">
+																<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																<button type="submit" class="btn btn-danger form">Yes</button>
+																</div>
+														</form>
+													</div>
+												</div>
+											</div>
+											</div>
+										<button type="button" class="btn btn-primary  btn-info-light" style="margin-top:5px;" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> Edit</i></button>
+											<div class="modal fade" id="modaleditproduct{{ i.id }}">
+												<div class="col-8 modal-dialog" role="document">
+													<div class="modal-content modal-content-demo">
+														<div class="row">
+															<div class="col-xl-12">
+																<div class="card">
+																	<div class="card-body">
+																		<div class="row row-sm">
+																			<div class="col-xl-5 col-lg-12 col-md-12">
+																				<div class="card-body">
+																					<h1>Edit Product</h1>
 																				</div>
-																			</div>
-																		</div>
-																		</div>
-                                                        <button type="button" class="btn btn-primary  btn-info-light" style="margin-top:5px;" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> Edit</i></button>
-																		<div class="modal fade" id="modaleditproduct{{ i.id }}">
-																		<div class="col-8 modal-dialog" role="document">
-																			<div class="modal-content modal-content-demo">
 																				<div class="row">
 																					<div class="col-xl-12">
-																						<div class="card">
-																							<div class="card-body">
-																								<div class="row row-sm">
-																									<div class="col-xl-5 col-lg-12 col-md-12">
-																										<div class="card-body">
-																											<h1>Edit Product</h1>
-																										</div>
-																										<div class="row">
-																											<div class="col-xl-12">
-																												<div class="product-carousel">
-																													<div id="Slider" class="carousel slide border" data-bs-ride="false">
-																														<div class="carousel-inner">
-																															<div class="carousel-item active"><img src="{{ info.logo.url }}" alt="img" class="img-fluid mx-auto d-block">
-																																<div class="text-center mt-5 mb-5 btn-list">
-																																</div>
-																															</div>
-																														</div>
-																													</div>
-																												</div>
-																											</div>
-																										</div>
-																									</div>
-																									<div class="col-md-12 col-xl-7">
-																										<div class="card">
-																											<div class="card-body">
-																												<form action="{% url 'change_info_url' info.pk %}" method="post" enctype="multipart/form-data">
-																													{% csrf_token %}
-																													<div class="">
-																														<div class="form-group">
-																															<label class="form-label">Name</label>
-																															<input type="text" class="form-control" name="name" value="{{ info.name }}" placeholder="Enter product name on uzbek" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Description UZ</label>
-																															<input type="text" class="form-control" name="description_uz" value="{{ info.description_uz }}" placeholder="Enter product name on description uz" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Description RU</label>
-																															<input type="text" class="form-control" name="description_ru" value="{{ info.description_ru }}" placeholder="Enter product name on description ru" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Telegram</label>
-																															<input type="text" class="form-control" name="telegram" value="{{ info.telegram }}" placeholder="Enter product price on  telegram" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Instagram</label>
-																															<input type="text" class="form-control" name="instagram" value="{{ info.instagram }}" placeholder="Enter product price on  instagram" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Youtube</label>
-																															<input type="text" class="form-control" name="youtube" value="{{ info.youtube }}" placeholder="Enter product price on  youtube" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Facebook</label>
-																															<input type="text" class="form-control" name="facebook" value="{{ i.facebook }}" placeholder="Enter product price on old facebook" required>
-																														</div>
-																														<div class="form-group">
-																															<input type="file" class="form-control" name="logo" placeholder="select photo">
-																														</div>
-																														<div class="modal-footer" style="margin-top:10px;">
-																															<div class="form">
-																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																															</div>
-																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save changes</button>
-																															</div>
-																														</div>
-																													</div>
-																												</form>
-																												{% else %}
-																												   <button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal" style="margin-top:2%;">Add Product</button>
-																														<div class="modal fade" id="modaldemo-3">
-																			<div class="modal-dialog" style="margin-top:1%;" role="document">
-																				<div class="modal-content modal-content-demo">
-																					<div class="modal-header">
-																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-																					</div>
-																					<div class="form" style="padding:1px;">
-																						<form action="{% url 'create_info_url' %}" method="post" enctype="multipart/form-data">
-																													{% csrf_token %}
-																														<div class="">
-																														<div class="form-group">
-																															<label class="form-label">Name</label>
-																															<input type="text" class="form-control" name="name"  placeholder="Enter product name on uzbek" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Description UZ</label>
-																															<input type="text" class="form-control" name="description_uz"  placeholder="Enter product name on description uz" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Description RU</label>
-																															<input type="text" class="form-control" name="description_ru"  placeholder="Enter product name on description ru" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Telegram</label>
-																															<input type="text" class="form-control" name="telegram"  placeholder="Enter product price on  telegram" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Instagram</label>
-																															<input type="text" class="form-control" name="instagram"  placeholder="Enter product price on  instagram" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Youtube</label>
-																															<input type="text" class="form-control" name="youtube"  placeholder="Enter product price on  youtube" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Facebook</label>
-																															<input type="text" class="form-control" name="facebook"  placeholder="Enter product price on old facebook" required>
-																														</div>
-																														<div class="form-group">
-																															<input type="file" class="form-control" name="logo" placeholder="Select logo">
-																														</div>
-																														<div class="modal-footer" style="margin-top:10px;">
-																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																															</div>
-																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save changes</button>
-																															</div>
-																														</div>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-														</div>
-																											</div>
+																						<div class="product-carousel">
+																							<div id="Slider" class="carousel slide border" data-bs-ride="false">
+																								<div class="carousel-inner">
+																									<div class="carousel-item active"><img src="{{ info.logo.url }}" alt="img" class="img-fluid mx-auto d-block">
+																										<div class="text-center mt-5 mb-5 btn-list">
 																										</div>
 																									</div>
 																								</div>
 																							</div>
 																						</div>
 																					</div>
-                        														</div>
+																				</div>
+																			</div>
+																			<div class="col-md-12 col-xl-7">
+																				<div class="card">
+																					<div class="card-body">
+																						<form action="{% url 'change_info_url' info.pk %}" method="post" enctype="multipart/form-data">
+																							{% csrf_token %}
+																							<div class="">
+																								<div class="form-group">
+																									<label class="form-label">Name</label>
+																									<input type="text" class="form-control" name="name" value="{{ info.name }}" placeholder="Enter product name on uzbek" required>
+																								</div>
+																								<div class="form-group">
+																									<label class="form-label">Description UZ</label>
+																									<input type="text" class="form-control" name="description_uz" value="{{ info.description_uz }}" placeholder="Enter product name on description uz" required>
+																								</div>
+																								<div class="form-group">
+																									<label class="form-label">Description RU</label>
+																									<input type="text" class="form-control" name="description_ru" value="{{ info.description_ru }}" placeholder="Enter product name on description ru" required>
+																								</div>
+																								<div class="form-group">
+																									<label class="form-label">Telegram</label>
+																									<input type="text" class="form-control" name="telegram" value="{{ info.telegram }}" placeholder="Enter product price on  telegram" required>
+																								</div>
+																								<div class="form-group">
+																									<label class="form-label">Instagram</label>
+																									<input type="text" class="form-control" name="instagram" value="{{ info.instagram }}" placeholder="Enter product price on  instagram" required>
+																								</div>
+																								<div class="form-group">
+																									<label class="form-label">Youtube</label>
+																									<input type="text" class="form-control" name="youtube" value="{{ info.youtube }}" placeholder="Enter product price on  youtube" required>
+																								</div>
+																								<div class="form-group">
+																									<label class="form-label">Facebook</label>
+																									<input type="text" class="form-control" name="facebook" value="{{ info.facebook }}" placeholder="Enter product price on old facebook" required>
+																								</div>
+																								<div class="form-group">
+																									<input type="file" class="form-control" name="logo" placeholder="select photo">
+																								</div>
+																								<div class="modal-footer" style="margin-top:10px;">
+																									<div class="form">
+																										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																										<button type="submit" class="btn btn-primary">Save changes</button>
+																									</div>
+																								</div>
+																							</div>
+																						</form>
+																					</div>
+																				</div>
 																			</div>
 																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-<!--                                -->
-                            </div>
-                        </div>
-                        <!-- End Row-->
-                    </div>
-                    <!-- CONTAINER CLOSED -->
-				{% endif %}
-                </div>
-            </div>
-{% endblock %}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6">
+					<div class="card custom-card overflow-hidden">
+						<div class="card-body p-8">
+							<a href="javascript:void(0)"><img src="{{ info.logo.url  }}" alt="img" class="br-5 w-100"></a>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		{% else %}
+			<div class="col-2">
+			<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal" style="margin-top:2%;">Add Product</button>
+				<div class="modal fade" id="modaldemo-3">
+					<div class=" modal-dialog" style="margin-top:1%;" role="document">
+						<div class="modal-content modal-content-demo">
+							<div class="modal-header">
+								<h6 class="modal-title">Create Info</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+							</div>
+								<div class="card" style="padding:15px;">
+								<form action="{% url 'create_info_url' %}" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="form">
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Company name</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="name"  placeholder="Enter company name" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Description UZ</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="description_uz"  placeholder="Enter description uz" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Description RU</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="description_ru"  placeholder="Enter description ru" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Telegram</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="telegram"  placeholder="Enter telegram url" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Instagram</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="instagram"  placeholder="Enter instagram url" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Youtube</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="youtube"  placeholder="Enter youtube url" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Facebook</label>
+											<div class="col-md-9">
+												<input type="text" class="form-control" name="facebook"  placeholder="Enter facebook url" required>
+											</div>
+										</div>
+										<div class=" row mb-4">
+											<label class="col-md-3 form-label">Brand</label>
+											<div class="col-md-9">
+												<input type="file" class="form-control" name="logo" placeholder="Select logo">
+											</div>
+										</div>
+										<div class="modal-footer" style="margin-top:10px;">
+											<div class="form">
+												<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+       </div>
+   </div>
+{% endblock content %}

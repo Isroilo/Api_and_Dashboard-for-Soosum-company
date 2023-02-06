@@ -6,45 +6,9 @@ from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import ExtractDay, ExtractMonth
 import calendar
+from decimal import Decimal
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-
-
-def user_update(request):
-    if request.method == 'POST':
-        user = request.user
-        username = request.POST['username']
-        password = request.POST.get('password')
-        password_confirm = request.POST.get('password_confirm')
-        user.username = username
-        if password is not None:
-            if password == password_confirm:
-                user.set_password(password)
-            else:
-                user.save()
-        user.save()
-        return redirect('user_update_url')
-    context = {
-        'user': request.user
-    }
-    return render(request, 'update-user.html', context)
-
-
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        usr = authenticate(username=username, password=password)
-        if usr is not None:
-            login(request, usr)
-            return redirect("home_url")
-    return render(request, 'login.html')
-
-
-@login_required(login_url='login_url')
-def logout_view(request):
-    logout(request)
-    return redirect("login_url")
 
 
 @login_required(login_url='login_url')
@@ -88,10 +52,45 @@ def home_view(request):
     }
     return render(request, 'index.html', context)
 
+"""Auth User"""
+def user_update(request):
+    if request.method == 'POST':
+        user = request.user
+        username = request.POST['username']
+        password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
+        user.username = username
+        if password is not None:
+            if password == password_confirm:
+                user.set_password(password)
+            else:
+                user.save()
+        user.save()
+        return redirect('user_update_url')
+    context = {
+        'user': request.user
+    }
+    return render(request, 'update-user.html', context)
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        usr = authenticate(username=username, password=password)
+        if usr is not None:
+            login(request, usr)
+            return redirect("home_url")
+    return render(request, 'login.html')
+
+
+@login_required(login_url='login_url')
+def logout_view(request):
+    logout(request)
+    return redirect("login_url")
+
 
 """ Search """
-
-
 @login_required(login_url='login_url')
 def search_view(request):
     if request.method == "POST":
@@ -101,7 +100,7 @@ def search_view(request):
         context = {
             "search": product
         }
-        return render(request, '', context)
+        return render(request, 'search.html', context)
 
 
 """ End Search """
@@ -275,8 +274,8 @@ def change_product(request, pk):
         name_uz = request.POST['name_uz']
         name_ru = request.POST['name_ru']
         photo = request.FILES.get('photo')
-        price = request.POST.get('price')
-        sale = request.POST.get('sale')
+        price = Decimal(request.POST.get('price'))
+        sale = Decimal(request.POST.get('sale'))
         product.name_uz = name_uz
         product.name_ru = name_ru
         product.price = price
@@ -495,7 +494,6 @@ def create_instruction(request):
             text_uz=text_uz,
             text_ru=text_ru,
             )
-        return redirect("instruction_url")
     return redirect("instruction_url")
 
 
@@ -508,11 +506,8 @@ def delete_instruction(request, pk):
 
 @login_required(login_url='login_url')
 def change_instruction(request, pk):
-    instruction = Instruction.objects.get(pk=pk)
-    context = {
-        "instruction": instruction
-    }
     if request.method == 'POST':
+        instruction = Instruction.objects.get(pk=pk)
         title_uz = request.POST.get('title_uz')
         title_ru = request.POST.get('title_ru')
         text_uz = request.POST.get('text_uz')
@@ -522,9 +517,7 @@ def change_instruction(request, pk):
         instruction.text_uz = text_uz
         instruction.text_ru = text_ru
         instruction.save()
-        return redirect("instruction_url")
     return redirect("instruction_url")
-
 
 """ End Instruction """
 """ Fact Title """
