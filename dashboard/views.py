@@ -10,6 +10,26 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 
+def user_update(request):
+    if request.method == 'POST':
+        user = request.user
+        username = request.POST['username']
+        password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
+        user.username = username
+        if password is not None:
+            if password == password_confirm:
+                user.set_password(password)
+            else:
+                user.save()
+        user.save()
+        return redirect('user_update_url')
+    context = {
+        'user': request.user
+    }
+    return render(request, 'update-user.html', context)
+
+
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get('username')

@@ -5,6 +5,7 @@ from .views import *
 urlpatterns = [
     path("home-view", home_view, name='home_url'),
     path('logout', logout_view, name='logout_url'),
+    path('user/update/', user_update, name='user_update_url'),
     path('', login_view, name='login_url'),
     path('excel/', include("excel_app.urls")),
     path('banner/', banner_view, name='banner_url'),
