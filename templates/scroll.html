@@ -7,56 +7,11 @@
             <!--app-content open-->
             <div class="main-content app-content mt-0">
                 <div class="side-app">
-
+					{% if instruction %}
                     <!-- CONTAINER -->
                     <div class="main-container container-fluid">
                         <div class="page-header">
                             <h1 class="page-title">Instruction</h1>
-                            <div>
-                                <div class="col-2">
-							<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Add Product</button>
-								<div class="modal fade" id="modaldemo-3">
-																			<div class="modal-dialog" style="margin-top:10%;" role="document">
-																				<div class="modal-content modal-content-demo">
-																					<div class="modal-header">
-																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-																					</div>
-																					<div class="form" style="padding:10px;">
-																						<form action="{% url 'create_instruction_url' %}" method="post" enctype="multipart/form-data">
-																													{% csrf_token %}
-																													<div class="">
-																														<div class="form-group">
-																															<label class="form-label">Title uz</label>
-																															<input type="text" class="form-control" name="title_uz" placeholder="Enter product title on uzbek" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Title ru</label>
-																															<input type="text" class="form-control" name="title_ru" placeholder="Enter product title on russian" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Text uz</label>
-																															<textarea class="form-control" name="text_uz" rows="6" required></textarea>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Text Ru</label>
-																															<textarea class="form-control" name="text_ru" rows="6" required></textarea>
-																														</div>
-																														<div class="modal-footer" style="margin-top:10px;">
-																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																															</div>
-																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save</button>
-																															</div>
-																														</div>
-																													</div>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-														</div>
-							</div>
-                            </div>
                         </div>
                         <!-- PAGE-HEADER END -->
 
@@ -104,7 +59,7 @@
 																					<form action="{% url 'delete_instruction_url' instruction.pk %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
-																							<button class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																							<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
 																							<button type="submit" class="btn btn-danger form">Yes</button>
 																							</div>
 																					</form>
@@ -112,6 +67,7 @@
 																			</div>
 																		</div>
 																		</div>
+
 									<button type="button" class="btn btn-icon  btn-info-light me-1 bradius" style="margin-top:5px;" data-bs-target="#modaleditabout{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i></button>
 															<div class="modal fade" id="modaleditabout{{ i.id }}">
 																		<div class="col-6 modal-dialog" role="document">
@@ -145,7 +101,7 @@
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 																															</div>
 																															<div class="form">
 																																<button type="submit" class="btn btn-primary">Save changes</button>
@@ -153,6 +109,50 @@
 																														</div>
 																													</div>
 																												</form>
+																												{% else %}
+																												<div class="col-2">
+																													<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3"   style="margin-top:10%;" data-bs-toggle="modal">Add Product</button>
+																													<div class="modal fade" id="modaldemo-3">
+																			<div class="modal-dialog" style="margin-top:10%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:10px;">
+																						<form action="{% url 'create_instruction_url' %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																													<div class="">
+																														<div class="form-group">
+																															<label class="form-label">Title uz</label>
+																															<input type="text" class="form-control" name="title_uz" placeholder="Enter product title on uzbek" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Title ru</label>
+																															<input type="text" class="form-control" name="title_ru" placeholder="Enter product title on russian" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text uz</label>
+																															<textarea class="form-control" name="text_uz" rows="6" required></textarea>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Text Ru</label>
+																															<textarea class="form-control" name="text_ru" rows="6" required></textarea>
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save</button>
+																															</div>
+																														</div>
+																													</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
+																												</div>
 																											</div>
 																										</div>
 																									</div>
@@ -169,8 +169,10 @@
                                 </div>
                         </div>
                     </div>
+					{% endif %}
                     <!-- CONTAINER CLOSED -->
                 </div>
+
             </div>
             <!--app-content closed-->
         </div>
