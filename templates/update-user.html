@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="my-3 my-md-5" style="margin-left:280px;">
+    <div class="container">
+      <div class="row">
+      <div class="col-lg-12 ">
+        <form class="card" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="card-body">
+            <h3 class="card-title">Edit User</h3>
+            <div class="row">
+              <div style="margin-left:280px;" class="col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Username</label>
+                  <input type="text" class="form-control"  value="{{user.username}}" name="username">
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" placeholder="******" name="password" required>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Password takrorlang</label>
+                  <input type="password" class="form-control" placeholder="*****" name="password_confirm" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button type="submit" class="btn btn-primary">O`zgartirish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
