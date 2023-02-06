@@ -124,7 +124,7 @@
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 																															</div>
 																															<div class="form">
 																																<button type="submit" class="btn btn-primary">Save changes</button>
@@ -154,7 +154,7 @@
 																					<form action="{% url 'delete_about_product_url' i.id %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
-																							<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+																							<button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
 																							<button type="submit" class="btn btn-danger">Yes</button>
 																							</div>
 																					</form>

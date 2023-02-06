@@ -8,69 +8,14 @@
 
                     <!-- CONTAINER -->
                     <div class="main-container container-fluid">
+						{% if info %}
 
                         <!-- PAGE-HEADER -->
                         <div class="page-header">
                             <h1 class="page-title">INFO</h1>
 
                             <div>
-                                <ol class="breadcrumb">
-                                   <button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Add Product</button>
-								<div class="modal fade" id="modaldemo-3">
-																			<div class="modal-dialog" style="margin-top:1%;" role="document">
-																				<div class="modal-content modal-content-demo">
-																					<div class="modal-header">
-																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-																					</div>
-																					<div class="form" style="padding:1px;">
-																						<form action="{% url 'create_info_url' %}" method="post" enctype="multipart/form-data">
-																													{% csrf_token %}
-																														<div class="">
-																														<div class="form-group">
-																															<label class="form-label">Name</label>
-																															<input type="text" class="form-control" name="name"  placeholder="Enter product name on uzbek" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Description UZ</label>
-																															<input type="text" class="form-control" name="description_uz"  placeholder="Enter product name on description uz" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Description RU</label>
-																															<input type="text" class="form-control" name="description_ru"  placeholder="Enter product name on description ru" required>
-																														</div>
-																														<div class="form-group">
-																															<label class="form-label">Telegram</label>
-																															<input type="text" class="form-control" name="telegram"  placeholder="Enter product price on  telegram" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Instagram</label>
-																															<input type="text" class="form-control" name="instagram"  placeholder="Enter product price on  instagram" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Youtube</label>
-																															<input type="text" class="form-control" name="youtube"  placeholder="Enter product price on  youtube" required>
-																														</div>
-                                                                                                                        <div class="form-group">
-																															<label class="form-label">Facebook</label>
-																															<input type="text" class="form-control" name="facebook"  placeholder="Enter product price on old facebook" required>
-																														</div>
-																														<div class="form-group">
-																															<input type="file" class="form-control" name="logo" placeholder="Select logo">
-																														</div>
-																														<div class="modal-footer" style="margin-top:10px;">
-																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																															</div>
-																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save changes</button>
-																															</div>
-																														</div>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-														</div>
-                                </ol>
+
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
@@ -140,7 +85,7 @@
 																					<form action="{% url 'delete_info_url' info.pk %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
-																							<button class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																							<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
 																							<button type="submit" class="btn btn-danger form">Yes</button>
 																							</div>
 																					</form>
@@ -215,7 +160,7 @@
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 																															</div>
 																															<div class="form">
 																																<button type="submit" class="btn btn-primary">Save changes</button>
@@ -223,6 +168,62 @@
 																														</div>
 																													</div>
 																												</form>
+																												{% else %}
+																												   <button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal" style="margin-top:2%;">Add Product</button>
+																														<div class="modal fade" id="modaldemo-3">
+																			<div class="modal-dialog" style="margin-top:1%;" role="document">
+																				<div class="modal-content modal-content-demo">
+																					<div class="modal-header">
+																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					</div>
+																					<div class="form" style="padding:1px;">
+																						<form action="{% url 'create_info_url' %}" method="post" enctype="multipart/form-data">
+																													{% csrf_token %}
+																														<div class="">
+																														<div class="form-group">
+																															<label class="form-label">Name</label>
+																															<input type="text" class="form-control" name="name"  placeholder="Enter product name on uzbek" required>
+																														</div>
+                                                                                                                        <div class="form-group">
+																															<label class="form-label">Description UZ</label>
+																															<input type="text" class="form-control" name="description_uz"  placeholder="Enter product name on description uz" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Description RU</label>
+																															<input type="text" class="form-control" name="description_ru"  placeholder="Enter product name on description ru" required>
+																														</div>
+																														<div class="form-group">
+																															<label class="form-label">Telegram</label>
+																															<input type="text" class="form-control" name="telegram"  placeholder="Enter product price on  telegram" required>
+																														</div>
+                                                                                                                        <div class="form-group">
+																															<label class="form-label">Instagram</label>
+																															<input type="text" class="form-control" name="instagram"  placeholder="Enter product price on  instagram" required>
+																														</div>
+                                                                                                                        <div class="form-group">
+																															<label class="form-label">Youtube</label>
+																															<input type="text" class="form-control" name="youtube"  placeholder="Enter product price on  youtube" required>
+																														</div>
+                                                                                                                        <div class="form-group">
+																															<label class="form-label">Facebook</label>
+																															<input type="text" class="form-control" name="facebook"  placeholder="Enter product price on old facebook" required>
+																														</div>
+																														<div class="form-group">
+																															<input type="file" class="form-control" name="logo" placeholder="Select logo">
+																														</div>
+																														<div class="modal-footer" style="margin-top:10px;">
+																															<div class="form">
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																															</div>
+																															<div class="form">
+																																<button type="submit" class="btn btn-primary">Save changes</button>
+																															</div>
+																														</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+														</div>
 																											</div>
 																										</div>
 																									</div>
@@ -246,7 +247,7 @@
                         <!-- End Row-->
                     </div>
                     <!-- CONTAINER CLOSED -->
-
+				{% endif %}
                 </div>
             </div>
 {% endblock %}
