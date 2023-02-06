@@ -120,19 +120,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="dropdown-divider m-0"></div>
-                                                    <a class="dropdown-item" href="profile.html">
+                                                    <a class="dropdown-item" href="{% url 'user_update_url' %} ">
                                                         <i class="dropdown-icon fe fe-user"></i> Profile
                                                     </a>
-                                                    <a class="dropdown-item" href="email-inbox.html">
-                                                        <i class="dropdown-icon fe fe-mail"></i> Inbox
-                                                        <span class="badge bg-danger rounded-pill float-end">5</span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="lockscreen.html">
+                                                    <a class="dropdown-item" href="{% url 'login_url' %}">
                                                         <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                     </a>
-                                                    <a class="dropdown-item" href="login.html">
+                                                    <a class="dropdown-item" href="{% url 'login_url' %}">
                                                         <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                     </a>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -185,10 +182,6 @@
                                     <span style="margin-left:10px;" class="side-menu__label">About Product</span></a>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'logout_url' %}"><i class="icon icon-basket-loaded"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Log Out</span></a>
-                            </li>
-                            <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'about_company_url' %}"><i class="side-menu__icon fe fe-slack"></i>
                                     <span style="margin-left:10px;" class="side-menu__label">About Company</span></a>
                             </li>
@@ -204,11 +197,6 @@
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'info_url' %}"><i class="icon icon-basket-loaded"></i>
                                     <span style="margin-left:10px;" class="side-menu__label">Info</span></a>
                             </li>
-                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'user_update_url' %}"><i class="icon icon-basket-loaded"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Update User</span></a>
-                            </li>
-
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'advice_url' %}"><i class="icon icon-basket-loaded"></i>
                                     <span style="margin-left:10px;" class="side-menu__label">Advice</span></a>
