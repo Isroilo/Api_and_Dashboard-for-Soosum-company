@@ -24,33 +24,33 @@
 																		<div class="modal-dialog" style="margin-top:10%;" role="document">
 																			<div class="modal-content modal-content-demo">
 																				<div class="modal-header">
-																					<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					<h6 class="modal-title">Bannerni Ozgartirish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																				</div>
 																				<div class="form" style="padding:10px;">
 																					<form action="{% url 'change_banner_url' banner.id %}" method="post" enctype="multipart/form-data" class="form-group">
 																						{% csrf_token %}
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Title uz</label>
+																							<label class="col-md-3 form-label">Sarlavha uz</label>
 																							<div class="col-md-9">
-																								<input type="text" class="form-control" name="title_uz" value="{{ banner.title_uz }}" placeholder="enter title on uzbek" required>
+																								<input type="text" class="form-control" name="title_uz" value="{{ banner.title_uz }}" placeholder="sarlavhani o'zbekcha kiriting" required>
 																							</div>
 																						</div>
 																						<div class="row mb-4">
-																							<label class="col-md-3 form-label" for="example-email">Title ru</label>
+																							<label class="col-md-3 form-label" for="example-email">Sarlavha ru</label>
 																							<div class="col-md-9">
-																								<input type="text" value="{{ banner.title_ru }}" name="title_ru" class="form-control" placeholder="enter title on russian" required>
+																								<input type="text" value="{{ banner.title_ru }}" name="title_ru" class="form-control" placeholder="sarlavhani rus tilida kiriting" required>
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Quality uz</label>
+																							<label class="col-md-3 form-label">Sifat uz</label>
 																							<div class="col-md-9">
-																								<input type="text" class="form-control" name="quality_uz" value="{{ banner.quality_uz }}" placeholder="enter quality on uzbek" required>
+																								<input type="text" class="form-control" name="quality_uz" value="{{ banner.quality_uz }}" placeholder="sifatni o'zbek tilida kiriting" required>
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Quality ru</label>
+																							<label class="col-md-3 form-label">Sifat ru</label>
 																							<div class="col-md-9">
-																								<input type="text" class="form-control" name="quality_ru" value="{{ banner.quality_ru }}" placeholder="enter quality on russian" required>
+																								<input type="text" class="form-control" name="quality_ru" value="{{ banner.quality_ru }}" placeholder="rus tilida sifatni kiriting" required>
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
@@ -60,8 +60,8 @@
 																							</div>
 																						</div>
 																						<div class="modal-footer">
-																							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																							<button type="submit" class="btn btn-primary">Save changes</button>
+																							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+																							<button type="submit" class="btn btn-primary">O'zgarishni saqlash</button>
 																						</div>
 																					</form>
 																				</div>
@@ -74,13 +74,13 @@
 																			<div class="modal-content modal-content-demo">
 																				<div class="form">
 																					<div class="modal-header">
-																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																						<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
 																					</div>
 																					<form action="{% url 'delete_banner_url' banner.id %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
-																							<button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
-																							<button type="submit" class="btn btn-danger">Yes</button>
+																							<button type="button" class="btn btn-success" data-bs-dismiss="modal">Yoq</button>
+																							<button type="submit" class="btn btn-danger">Ha</button>
 																							</div>
 																					</form>
 																				</div>
@@ -106,38 +106,38 @@
 												 			</div>
 											  </div>
 											{% else %}
-											<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo1" data-bs-toggle="modal">Create Banner</button>
+											<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo1" data-bs-toggle="modal"> Banner Yaratish</button>
 													<div class="modal fade" id="modaldemo1">
 																		<div class="modal-dialog" style="margin-top:10%;" role="document">
 																			<div class="modal-content modal-content-demo">
 																				<div class="modal-header">
-																					<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					<h6 class="modal-title"> Banner Yaratish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																				</div>
 																				<div class="form" style="padding:10px;">
 																					<form action="{% url 'create_banner_url' %}" method="post" enctype="multipart/form-data" class="form-group">
 																						{% csrf_token %}
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Title uz</label>
+																							<label class="col-md-3 form-label">Sarlavha uz</label>
 																							<div class="col-md-9">
-																								<input type="text" class="form-control" name="title_uz" placeholder="enter title on uzbek" required>
+																								<input type="text" class="form-control" name="title_uz" placeholder="sarlavhani o'zbekcha kiriting" required>
 																							</div>
 																						</div>
 																						<div class="row mb-4">
-																							<label class="col-md-3 form-label" for="example-email">Title ru</label>
+																							<label class="col-md-3 form-label" for="example-email">Sarlavha ru</label>
 																							<div class="col-md-9">
-																								<input type="text" name="title_ru" class="form-control" placeholder="enter title on russian" required>
+																								<input type="text" name="title_ru" class="form-control" placeholder="sarlavhani rus tilida kiriting" required>
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Quality uz</label>
+																							<label class="col-md-3 form-label">Sifat uz</label>
 																							<div class="col-md-9">
-																								<input type="text" class="form-control" name="quality_uz" placeholder="enter quality on uzbek" required>
+																								<input type="text" class="form-control" name="quality_uz" placeholder=" o`zbek tilida sifatni kiriting" required>
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Quality ru</label>
+																							<label class="col-md-3 form-label">Sifat ru</label>
 																							<div class="col-md-9">
-																								<input type="text" class="form-control" name="quality_ru" placeholder="enter quality on russian" required>
+																								<input type="text" class="form-control" name="quality_ru" placeholder="rus tilida sifatni kiriting" required>
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
@@ -147,8 +147,8 @@
 																							</div>
 																						</div>
 																						<div class="modal-footer">
-																							<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																							<button type="submit" class="btn btn-primary">Save</button>
+																							<button class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+																							<button type="submit" class="btn btn-primary">Saqlash</button>
 																						</div>
 																					</form>
 																				</div>

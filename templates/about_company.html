@@ -43,7 +43,7 @@
 																								<div class="row row-sm">
 																									<div class="col-xl-5 col-lg-12 col-md-12">
 																										<div class="card-body">
-																											<h1>Edit About Company</h1>
+																											<h1>Kompaniyani ozgartirish</h1>
 																										</div>
 																										<div class="row">
 																											<div class="card center">
@@ -60,23 +60,23 @@
 																													{% csrf_token %}
 																													<div class="">
 																														<div class=" row mb-4">
-																															<label class="col-md-3 form-label">Title uz</label>
+																															<label class="col-md-3 form-label">Sarlavha uz</label>
 																															<div class="col-md-9">
-																																<input type="text" class="form-control" name="title_uz" value="{{ about_company.title_uz }}" placeholder="enter title on uzbek" required>
+																																<input type="text" class="form-control" name="title_uz" value="{{ about_company.title_uz }}" placeholder="sarlavhani o'zbekcha kiriting" required>
 																															</div>
 																														</div>
 																														<div class=" row mb-4">
-																															<label class="col-md-3 form-label">Title ru</label>
+																															<label class="col-md-3 form-label">Sarlavha ru</label>
 																															<div class="col-md-9">
-																																<input type="text" class="form-control" name="title_ru" value="{{ about_company.title_ru }}" placeholder="enter title on russian" required>
+																																<input type="text" class="form-control" name="title_ru" value="{{ about_company.title_ru }}" placeholder="sarlavhani ruscha kiriting" required>
 																															</div>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">Text uz</label>
+																															<label class="form-label">Matn uz</label>
 																															<textarea class="form-control" name="text_uz" rows="6" required>{{about_company.text_uz}}</textarea>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">Text ru</label>
+																															<label class="form-label">Matn ru</label>
 																															<textarea class="form-control" name="text_ru" rows="6" required>{{about_company.text_ru}}</textarea>
 																														</div>
 																														<div class="form-group">
@@ -84,10 +84,10 @@
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
 																															</div>
 																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save changes</button>
+																																<button type="submit" class="btn btn-primary">O`zgarishni saqlash</button>
 																															</div>
 																														</div>
 																													</div>
@@ -109,13 +109,13 @@
 																			<div class="modal-content modal-content-demo">
 																				<div class="form">
 																					<div class="modal-header">
-																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																						<h5 style="padding-top:18px; margin-left:50px;">Malumotni o`chrib yuborishga aminmisiz</h5>
 																					</div>
 																					<form action="{% url 'delete_about_company_url' about_company.id %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
-																							<button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
-																							<button type="submit" class="btn btn-danger">Yes</button>
+																							<button type="button" class="btn btn-success" data-bs-dismiss="modal">Yoq</button>
+																							<button type="submit" class="btn btn-danger">Ha</button>
 																							</div>
 																					</form>
 																				</div>
@@ -137,7 +137,7 @@
 								<h1 class="page-title">About Company</h1>
 							</div>
 							<div class="col-2">
-							<button type="button" style="margin-left:30px;" class="btn btn-icon  btn-info-light" data-bs-target="#modaleditcreate" data-bs-toggle="modal">Add About Company</button>
+							<button type="button" style="margin-left:30px;" class="btn btn-icon  btn-info-light" data-bs-target="#modaleditcreate" data-bs-toggle="modal">Kompaniya koshish</button>
 								<div class="modal fade" id="modaleditcreate">
 																		<div class="col-5 modal-dialog" role="document">
 																			<div class="modal-content modal-content-demo">
@@ -154,23 +154,23 @@
 																													{% csrf_token %}
 																													<div class="form">
 																														<div class=" row mb-4">
-																															<label class="col-md-3 form-label">Title uz</label>
+																															<label class="col-md-3 form-label">Sarlavha uz</label>
 																															<div class="col-md-9">
-																																<input type="text" class="form-control" name="title_uz" placeholder="enter title on uzbek" required>
+																																<input type="text" class="form-control" name="title_uz" placeholder="sarlavhani o'zbekcha kiriting" required>
 																															</div>
 																														</div>
 																														<div class=" row mb-4">
-																															<label class="col-md-3 form-label">Title ru</label>
+																															<label class="col-md-3 form-label">Sarlavha ru</label>
 																															<div class="col-md-9">
-																																<input type="text" class="form-control" name="title_ru" placeholder="enter title on russian" required>
+																																<input type="text" class="form-control" name="title_ru" placeholder="esarlavhani ruscha kiriting" required>
 																															</div>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">Text uz</label>
+																															<label class="form-label">Matn uz</label>
 																															<textarea class="form-control" name="text_uz" rows="6" required></textarea>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">Text ru</label>
+																															<label class="form-label">Matn ru</label>
 																															<textarea class="form-control" name="text_ru" rows="6" required></textarea>
 																														</div>
 																														<div class="form-group">
@@ -178,10 +178,10 @@
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
 																															</div>
 																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save</button>
+																																<button type="submit" class="btn btn-primary">O`zgarishni Saqlash</button>
 																															</div>
 																														</div>
 																													</div>

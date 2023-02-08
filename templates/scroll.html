@@ -11,7 +11,7 @@
                     <div class="main-container container-fluid">
 						<div class="card mb-3">
 							<div class="page-header" style="margin-left:1%;">
-                            <h1 class="page-title">Instruction</h1>
+                            <h1 class="page-title">Ko'rsatma</h1>
                         	</div>
                         <div class="row g-0">
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -48,20 +48,20 @@
 										<div class="modal-content modal-content-demo">
 											<div class="form">
 												<div class="modal-header">
-													<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+													<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
 												</div>
 												<form action="{% url 'delete_instruction_url' instruction.pk %}" method="post">
 													{% csrf_token %}
 													<div class="modal-footer">
-														<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
-														<button type="submit" class="btn btn-danger form">Yes</button>
+														<button type="button" class="btn btn-success form" data-bs-dismiss="modal">Yoq</button>
+														<button type="submit" class="btn btn-danger form">Ha</button>
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
 								</div>
-								<button type="button" class="btn btn-icon  btn-info-light" style="margin-top:5px;" data-bs-target="#modaleditabout{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i>Edit</button>
+								<button type="button" class="btn btn-icon  btn-info-light" style="margin-top:5px;" data-bs-target="#modaleditabout{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i>Ozgartirish</button>
 								<div class="modal fade" id="modaleditabout{{ i.id }}">
 									<div class="col-6 modal-dialog" role="document">
 										<div class="modal-content modal-content-demo">
@@ -77,27 +77,27 @@
 																				{% csrf_token %}
 																				<div class="">
 																					<div class="form-group">
-																						<label class="form-label">Title uz</label>
+																						<label class="form-label">Sarlavha uz</label>
 																						<input class="form-control" name="title_uz" value="{{instruction.title_uz}}" required>
 																					</div>
 																					<div class="form-group">
-																						<label class="form-label">Title ru</label>
+																						<label class="form-label">Sarlavha ru</label>
 																						<input class="form-control" name="title_ru" value="{{instruction.title_ru}}" required>
 																					</div>
 																					<div>
-																						<label class="form-label">Text uz</label>
+																						<label class="form-label">Matn uz</label>
 																						<textarea class="form-control" name="text_uz" rows="6" required>{{instruction.text_ru}}</textarea>
 																					</div>
 																					<div>
-																						<label class="form-label">Text uz</label>
+																						<label class="form-label">Matn uz</label>
 																						<textarea class="form-control" name="text_ru" rows="6" required>{{instruction.text_ru}}</textarea>
 																					</div>
 																					<div class="modal-footer" style="margin-top:10px;">
 																						<div class="form">
-																							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
 																						</div>
 																						<div class="form">
-																							<button type="submit" class="btn btn-primary">Save changes</button>
+																							<button type="submit" class="btn btn-primary">Malumotni Saqlash</button>
 																						</div>
 																					</div>
 																				</div>
@@ -119,7 +119,7 @@
                         </div>
 					{% else %}
 					<div class="col-2">
-						<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3"   style="margin-top:10%;" data-bs-toggle="modal">Add Instruction</button>
+						<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3"   style="margin-top:10%;" data-bs-toggle="modal">Ko'rsatma qo'shish</button>
 							<div class="modal fade" id="modaldemo-3">
 								<div class="modal-dialog" style="margin-top:5%;" role="document">
 									<div class="modal-content modal-content-demo">
@@ -131,27 +131,27 @@
 												{% csrf_token %}
 												<div class="">
 													<div class="form-group">
-														<label class="form-label">Title uz</label>
-														<input type="text" class="form-control" name="title_uz" placeholder="Enter product title on uzbek" required>
+														<label class="form-label">Sarlavha uz</label>
+														<input type="text" class="form-control" name="title_uz" placeholder="Mahsulot nomini oʻzbek tilida kiriting" required>
 													</div>
 													<div class="form-group">
-														<label class="form-label">Title ru</label>
-														<input type="text" class="form-control" name="title_ru" placeholder="Enter product title on russian" required>
+														<label class="form-label">Sarlavha ru</label>
+														<input type="text" class="form-control" name="title_ru" placeholder="Mahsulot nomini rus tilida kiriting" required>
 													</div>
 													<div class="form-group">
-														<label class="form-label">Text uz</label>
+														<label class="form-label">Matn uz</label>
 														<textarea class="form-control" name="text_uz" rows="3" required></textarea>
 													</div>
 													<div class="form-group">
-														<label class="form-label">Text Ru</label>
+														<label class="form-label">Matn Ru</label>
 														<textarea class="form-control" name="text_ru" rows="3" required></textarea>
 													</div>
 													<div class="modal-footer" style="margin-top:10px;">
 														<div class="form">
-															<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+															<button class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
 														</div>
 														<div class="form">
-															<button type="submit" class="btn btn-primary">Save</button>
+															<button type="submit" class="btn btn-primary">Saqlash</button>
 														</div>
 													</div>
 												</div>

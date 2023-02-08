@@ -10,45 +10,45 @@
                         <!-- PAGE-HEADER -->
 						<div class="row">
 							<div class="col-10 page-header">
-								<h1 class="page-title">Products</h1>
+								<h1 class="page-title">Mahsulotlar</h1>
 							</div>
 							<div class="col-2">
-							<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Add Product</button>
+							<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal">Maxsulot Koshish </button>
 								<div class="modal fade" id="modaldemo-3">
 																			<div class="modal-dialog" style="margin-top:10%;" role="document">
 																				<div class="modal-content modal-content-demo">
 																					<div class="modal-header">
-																						<h6 class="modal-title">Edit Banner</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																						<h6 class="modal-title">Maxsulot Koshish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																					</div>
 																					<div class="form" style="padding:10px;">
 																						<form action="{% url 'create_product_url' %}" method="post" enctype="multipart/form-data">
 																													{% csrf_token %}
 																													<div class="">
 																														<div class="form-group">
-																															<label class="form-label">Name uz</label>
-																															<input type="text" class="form-control" name="name_uz" placeholder="Enter product name on uzbek" required>
+																															<label class="form-label">Nom uz</label>
+																															<input type="text" class="form-control" name="name_uz" placeholder="Mahsulot nomini oʻzbekcha kiriting" required>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">Name ru</label>
-																															<input type="text" class="form-control" name="name_ru" placeholder="Enter product name on russian" required>
+																															<label class="form-label">Nom ru</label>
+																															<input type="text" class="form-control" name="name_ru" placeholder="Mahsulot nomini ruscha kiriting" required>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">How much</label>
-																															<input type="number" class="form-control" name="price" min="0" value="0" step="any" placeholder="Enter product price on old price" required>
+																															<label class="form-label">Narxi qancha</label>
+																															<input type="number" class="form-control" name="price" min="0" value="0" step="any" placeholder="Mahsulot narxini eski narxda kiriting" required>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">How much on sale</label>
-																															<input type="number" name="sale" min="0" value="0" step="any" class="form-control" placeholder="Enter product price on sale">
+																															<label class="form-label">Qancha sotuvda</label>
+																															<input type="number" name="sale" min="0" value="0" step="any" class="form-control" placeholder="Savdodagi mahsulot narxini kiriting">
 																														</div>
 																														<div class="form-group">
 																															<input type="file" class="form-control" name="photo" placeholder="select photo">
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
 																															</div>
 																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save</button>
+																																<button type="submit" class="btn btn-primary">Saqlash</button>
 																															</div>
 																														</div>
 																													</div>
@@ -93,7 +93,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-footer text-center">
-                                                            <button type="button" class="btn btn-primary  btn-info-light" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> Edit</i></button>
+                                                            <button type="button" class="btn btn-primary  btn-info-light" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> Ozgartirish</i></button>
 																		<div class="modal fade" id="modaleditproduct{{ i.id }}">
 																		<div class="col-8 modal-dialog" role="document">
 																			<div class="modal-content modal-content-demo">
@@ -104,7 +104,7 @@
 																								<div class="row row-sm">
 																									<div class="col-xl-5 col-lg-12 col-md-12">
 																										<div class="card-body">
-																											<h1>Edit Product</h1>
+																											<h1>Moxsulotni Ozgartirish</h1>
 																										</div>
 																										<div class="row">
 																											<div class="col-xl-12">
@@ -128,30 +128,30 @@
 																													{% csrf_token %}
 																													<div class="">
 																														<div class="form-group">
-																															<label class="form-label">Name uz</label>
-																															<input type="text" class="form-control" name="name_uz" value="{{ i.name_uz }}" placeholder="Enter product name on uzbek" required>
+																															<label class="form-label">Nom uz</label>
+																															<input type="text" class="form-control" name="name_uz" value="{{ i.name_uz }}" placeholder="Mahsulot nomini oʻzbekcha kiriting" required>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">Name ru</label>
-																															<input type="text" class="form-control" name="name_ru" value="{{ i.name_ru }}" placeholder="Enter product name on russian" required>
+																															<label class="form-label">Nom ru</label>
+																															<input type="text" class="form-control" name="name_ru" value="{{ i.name_ru }}" placeholder="Mahsulot nomini ruscha kiriting" required>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">How much</label>
-																															<input type="text" class="form-control" name="price" value="{{ i.price }}" placeholder="Enter product price on old price" required>
+																															<label class="form-label">Narxi qancha</label>
+																															<input type="text" class="form-control" name="price" value="{{ i.price }}" placeholder="Mahsulot narxini eski narxda kiriting" required>
 																														</div>
 																														<div class="form-group">
-																															<label class="form-label">How much on sale</label>
-																															<input type="text" name="sale" class="form-control" {% if i.is_sale %} value="{{ i.sale }}" {% endif %} placeholder="Enter product price on sale">
+																															<label class="form-label">Qancha sotuvda</label>
+																															<input type="text" name="sale" class="form-control" {% if i.is_sale %} value="{{ i.sale }}" {% endif %} placeholder="Savdodagi mahsulot narxini kiriting">
 																														</div>
 																														<div class="form-group">
 																															<input type="file" class="form-control" name="photo" placeholder="select photo">
 																														</div>
 																														<div class="modal-footer" style="margin-top:10px;">
 																															<div class="form">
-																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor kilish</button>
 																															</div>
 																															<div class="form">
-																																<button type="submit" class="btn btn-primary">Save changes</button>
+																																<button type="submit" class="btn btn-primary">O'zgarishni saqlash</button>
 																															</div>
 																														</div>
 																													</div>
@@ -173,16 +173,16 @@
 																			<div class="modal-content modal-content-demo">
 																				<div class="form">
 																					<div class="modal-header">
-																						<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+																						<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
 																					</div>
 																					<form action="{% url 'delete_product_url' i.id %}" method="post">
 																						{% csrf_token %}
 																							<div class="modal-footer">
 																								<div class="form">
-																									<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
+																									<button type="button" class="btn btn-success form" data-bs-dismiss="modal">Yoq</button>
 																								</div>
 																									<div class="form">
-																									<button type="submit" class="btn btn-danger form">Yes</button>
+																									<button type="submit" class="btn btn-danger form">Ha</button>
 																									</div>
 																							</div>
 																					</form>

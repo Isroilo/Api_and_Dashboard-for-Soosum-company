@@ -5,7 +5,7 @@
             <div class="col-xl-6" style="margin-left:20%;margin-top:2%;">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Clients Table</h3>
+                        <h3 class="card-title">Klient Jadvali</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -21,9 +21,9 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Phone</th>
-                                        <th>Date</th>
+                                        <th>Ism</th>
+                                        <th>Telefon</th>
+                                        <th>Sana</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,7 +44,7 @@
 											{% if orders.has_previous %}
 												<li class="page-item">
 													<a class="page-link" href="?page={{orders.previous_page_number }}">
-														Previous
+														Oldingi
 													</a>
 												</li>
 											{% endif %}
@@ -60,7 +60,7 @@
 											{% if orders.has_next %}
 											<li class="page-item">
 												<a class="page-link" href="?page={{ orders.next_page_number }}">
-													Next
+													Keyingisi
 												</a>
 											</li>
 											{% endif %}

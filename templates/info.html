@@ -9,13 +9,13 @@
 			<div class="col-12">
 			<div class="card mb-3">
 				<div style="margin-left:3%;" class="page-header">
-				<h1 class="page-title">INFO</h1>
+				<h1 class="page-title">Ma'lumot</h1>
 				</div>
 				<div class="row g-0">
 				<div class="col-xl-6 col-lg-6 col-md-6">
 					<div class="card custom-card">
 						<div class="card-body">
-							<h5 class="mb-3">Info Details</h5>
+							<h5 class="mb-3">Ma'lumot tafsilotlari</h5>
 							<div class="">
 								<div class="row">
 									<div class="col-xl-12">
@@ -23,7 +23,7 @@
 											<table class="table mb-0 table-bordered text-nowrap">
 												<tbody>
 													<tr>
-														<th>Name</th>
+														<th>Nom</th>
 														<td>{{ info.name }}</td>
 													</tr>
 													<tr>
@@ -36,11 +36,11 @@
 													</tr>
 													{% if info.description_uz or description_ru %}
 														<tr>
-															<th>Description uz</th>
+															<th>Tavsif uz</th>
 															<td>{{ info.description_uz }}</td>
 														</tr>
 														<tr>
-															<th>Description Ru</th>
+															<th>Tavsif Ru</th>
 															<td>{{ info.description_ru  }}</td>
 														</tr>
 													{% endif %}
@@ -62,20 +62,20 @@
 												<div class="modal-content modal-content-demo">
 													<div class="form">
 														<div class="modal-header">
-															<h5 style="padding-top:18px; margin-left:50px;">I understand the consequences, delete this infos</h5>
+															<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
 														</div>
 														<form action="{% url 'delete_info_url' info.pk %}" method="post">
 															{% csrf_token %}
 																<div class="modal-footer">
-																<button type="button" class="btn btn-success form" data-bs-dismiss="modal">No</button>
-																<button type="submit" class="btn btn-danger form">Yes</button>
+																<button type="button" class="btn btn-success form" data-bs-dismiss="modal">Yoq</button>
+																<button type="submit" class="btn btn-danger form">Ha</button>
 																</div>
 														</form>
 													</div>
 												</div>
 											</div>
 											</div>
-										<button type="button" class="btn btn-primary  btn-info-light" style="margin-top:5px;" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> Edit</i></button>
+										<button type="button" class="btn btn-primary  btn-info-light" style="margin-top:5px;" data-bs-target="#modaleditproduct{{ i.id }}" data-bs-toggle="modal"><i class="fe fe-edit"> O`zgartirish</i></button>
 											<div class="modal fade" id="modaleditproduct{{ i.id }}">
 												<div class="col-8 modal-dialog" role="document">
 													<div class="modal-content modal-content-demo">
@@ -86,7 +86,7 @@
 																		<div class="row row-sm">
 																			<div class="col-xl-5 col-lg-12 col-md-12">
 																				<div class="card-body">
-																					<h1>Edit Product</h1>
+																					<h1>Malumotni o`zgartirish</h1>
 																				</div>
 																				<div class="row">
 																					<div class="col-xl-12">
@@ -110,15 +110,15 @@
 																							{% csrf_token %}
 																							<div class="">
 																								<div class="form-group">
-																									<label class="form-label">Name</label>
+																									<label class="form-label">Nom</label>
 																									<input type="text" class="form-control" name="name" value="{{ info.name }}" placeholder="Enter product name on uzbek" required>
 																								</div>
 																								<div class="form-group">
-																									<label class="form-label">Description UZ</label>
+																									<label class="form-label">Tavsif UZ</label>
 																									<input type="text" class="form-control" name="description_uz" value="{{ info.description_uz }}" placeholder="Enter product name on description uz" required>
 																								</div>
 																								<div class="form-group">
-																									<label class="form-label">Description RU</label>
+																									<label class="form-label">Tavsif RU</label>
 																									<input type="text" class="form-control" name="description_ru" value="{{ info.description_ru }}" placeholder="Enter product name on description ru" required>
 																								</div>
 																								<div class="form-group">
@@ -142,8 +142,8 @@
 																								</div>
 																								<div class="modal-footer" style="margin-top:10px;">
 																									<div class="form">
-																										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																										<button type="submit" class="btn btn-primary">Save changes</button>
+																										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
+																										<button type="submit" class="btn btn-primary">O`zgarishni saqlash</button>
 																									</div>
 																								</div>
 																							</div>
@@ -178,69 +178,69 @@
 		</div>
 		{% else %}
 			<div class="col-2">
-			<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal" style="margin-top:2%;">Add Product</button>
+			<button type="button" class="btn btn-success  btn-info-success" data-bs-target="#modaldemo-3" data-bs-toggle="modal" style="margin-top:2%;">Malumot qo'shish</button>
 				<div class="modal fade" id="modaldemo-3">
 					<div class=" modal-dialog" style="margin-top:1%;" role="document">
 						<div class="modal-content modal-content-demo">
 							<div class="modal-header">
-								<h6 class="modal-title">Create Info</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+								<h6 class="modal-title">Ma'lumot yaratish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 							</div>
 								<div class="card" style="padding:15px;">
 								<form action="{% url 'create_info_url' %}" method="post" enctype="multipart/form-data">
 									{% csrf_token %}
 									<div class="form">
 										<div class=" row mb-4">
-											<label class="col-md-3 form-label">Company name</label>
+											<label class="col-md-3 form-label">Shirkat nomi</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="name"  placeholder="Enter company name" required>
+												<input type="text" class="form-control" name="name"  placeholder="Kompaniya nomini kiriting" required>
 											</div>
 										</div>
 										<div class=" row mb-4">
 											<label class="col-md-3 form-label">Description UZ</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="description_uz"  placeholder="Enter description uz" required>
+												<input type="text" class="form-control" name="description_uz"  placeholder="Tavsifni o`zbekcha kiriting " required>
 											</div>
 										</div>
 										<div class=" row mb-4">
 											<label class="col-md-3 form-label">Description RU</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="description_ru"  placeholder="Enter description ru" required>
+												<input type="text" class="form-control" name="description_ru"  placeholder="Tavsifni ruscha kiriting" required>
 											</div>
 										</div>
 										<div class=" row mb-4">
 											<label class="col-md-3 form-label">Telegram</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="telegram"  placeholder="Enter telegram url" required>
+												<input type="text" class="form-control" name="telegram"  placeholder="Telegram URL manzilini kiriting" required>
 											</div>
 										</div>
 										<div class=" row mb-4">
 											<label class="col-md-3 form-label">Instagram</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="instagram"  placeholder="Enter instagram url" required>
+												<input type="text" class="form-control" name="instagram"  placeholder="Instagram URL manzilini kiriting" required>
 											</div>
 										</div>
 										<div class=" row mb-4">
 											<label class="col-md-3 form-label">Youtube</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="youtube"  placeholder="Enter youtube url" required>
+												<input type="text" class="form-control" name="youtube"  placeholder="Youtube URL manzilini kiriting" required>
 											</div>
 										</div>
 										<div class=" row mb-4">
 											<label class="col-md-3 form-label">Facebook</label>
 											<div class="col-md-9">
-												<input type="text" class="form-control" name="facebook"  placeholder="Enter facebook url" required>
+												<input type="text" class="form-control" name="facebook"  placeholder="Facebook URL manzilini kiriting" required>
 											</div>
 										</div>
 										<div class=" row mb-4">
-											<label class="col-md-3 form-label">Brand</label>
+											<label class="col-md-3 form-label">Brend</label>
 											<div class="col-md-9">
 												<input type="file" class="form-control" name="logo" placeholder="Select logo">
 											</div>
 										</div>
 										<div class="modal-footer" style="margin-top:10px;">
 											<div class="form">
-												<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-												<button type="submit" class="btn btn-primary">Save changes</button>
+												<button class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
+												<button type="submit" class="btn btn-primary">O`zgarishni saqlash</button>
 											</div>
 										</div>
 									</div>
