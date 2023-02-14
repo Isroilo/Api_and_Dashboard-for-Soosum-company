@@ -7,7 +7,7 @@
 
                     <!-- CONTAINER -->
                     <div style="margin-top:2%;" class="main-container container-fluid">
-                        				<div class="col-12">
+                        				<div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
 											{% if banner %}
 											<div class="card mb-3">
 											  <div class="row g-0">
@@ -24,7 +24,7 @@
 																		<div class="modal-dialog" style="margin-top:10%;" role="document">
 																			<div class="modal-content modal-content-demo">
 																				<div class="modal-header">
-																					<h6 class="modal-title">Bannerni Ozgartirish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																					<h6 class="modal-title">Tahrirlash</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																				</div>
 																				<div class="form" style="padding:10px;">
 																					<form action="{% url 'change_banner_url' banner.id %}" method="post" enctype="multipart/form-data" class="form-group">
@@ -54,14 +54,14 @@
 																							</div>
 																						</div>
 																						<div class=" row mb-4">
-																							<label class="col-md-3 form-label">Photo</label>
+																							<label class="col-md-3 form-label">Rasmi</label>
 																							<div class="col-md-9">
 																								<input type="file" class="form-control" name="photo" placeholder="select photo">
 																							</div>
 																						</div>
 																						<div class="modal-footer">
 																							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
-																							<button type="submit" class="btn btn-primary">O'zgarishni saqlash</button>
+																							<button type="submit" class="btn btn-primary">saqlash</button>
 																						</div>
 																					</form>
 																				</div>
@@ -74,7 +74,7 @@
 																			<div class="modal-content modal-content-demo">
 																				<div class="form">
 																					<div class="modal-header">
-																						<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
+																						<h5 style="margin-left:23%;">O`chirib yuborishga aminmisiz</h5>
 																					</div>
 																					<form action="{% url 'delete_banner_url' banner.id %}" method="post">
 																						{% csrf_token %}
@@ -90,18 +90,18 @@
 																	</div>
 															   </div>
 												  			</div>
-															<div class="col-sm-3 col-md-3 col-xl-3">
+															<div class="col-sm-3 col-md-3 col-xl-3 col-lg-3">
 
 																	  </div>
 																  </div>
-																  <div class="col-md-3" style="margin-top:10%;">
+																  <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3" style="margin-top:10%;">
 																	  <div class="card-body text-center">
 																		  <p class="h6">{{ banner.quality_ru }}</p>
 																		<h5 class="h5">{{ banner.title_ru }}</h5>
 																	  </div>
 																  </div>
-																  <div class="col-md-6">
-																	  <img src="{{ banner.photo.url }}" style="border-radius:5px;" width="600" height="400" alt="...">
+																  <div class="col-md-6 col-sm-6 col-ld-6 col-xl-6">
+																	  <img src="{{ banner.photo.url }}" style="border-radius:5px;" width="100%" height="100%" alt="...">
 																  </div>
 												 			</div>
 											  </div>
@@ -160,7 +160,5 @@
                     </div>
                 </div>
             </div>
-
-
-
+			<!--app-content close-->
 {% endblock content %}

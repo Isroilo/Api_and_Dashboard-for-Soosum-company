@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <div class="main-content mt-0">
+    <div class="main-content app-content mt-0">
                 <div class="side-app">
-
                     <!-- CONTAINER -->
-                    <div style="margin-left:18%;margin-top:3%;" class="main-container">
+                    <div style="margin-top:3%;" class="main-container">
                         <div class="container">
-                            <div class="col-xl-12 col-md-12">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12">
                                 <div class="card">
+									<div class="form">
                                     <div class="card-header">
-										<div class="col-6">
-                                        	<div class="card-title">Maslahat sarlavhasi</div>
+										<div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
+                                        	<h3>Maslahat sarlavhasi</h3>
 										</div>
-										<div class="clo-6" style="margin-left:28%;">
+										<div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
 											{% if advice_title %}
-											<button type="button" class="btn btn-icon  btn-warning-light" style="margin-left:85px;margin-right:1px;" data-bs-target="#modaldemo{{ advice_title.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i>Edit</button>
+											<button type="button" class="btn btn-icon  btn-warning-light" data-bs-target="#modaldemo{{ advice_title.id }}" data-bs-toggle="modal"><i class="fe fe-edit"></i>O'zgartirish</button>
 														<div class="modal fade" id="modaldemo{{ advice_title.id }}">
 																			<div class="modal-dialog" style="margin-top:9%;" role="document">
 																				<div class="modal-content modal-content-demo">
@@ -66,31 +66,31 @@
 																			</div>
 														</div>
 											{% else %}
-											<button type="button" class="btn btn-success  btn-info-light" data-bs-target="#modaldemocreate" style="margin-left:200%;" data-bs-toggle="modal">Yaratish</button>
-														<div class="modal fade" id="modaldemocreate">
+											<button type="button" class="btn btn-success  btn-info-light" data-bs-target="#modaldemocreate1" style="margin-left:70%;" data-bs-toggle="modal">Sarlavha Yaratish</button>
+														<div class="modal fade" id="modaldemocreate1">
 																			<div class="modal-dialog" style="margin-top:10%;" role="document">
 																				<div class="modal-content modal-content-demo">
 																					<div class="modal-header">
-																						<h6 class="modal-title">Maslahat sarlavhasini yarating</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+																						<h6 class="modal-title">Sarlavha yarating</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																					</div>
 																					<div class="form" style="padding:10px;">
 																						<form action="{% url 'create_advice_title_url' %}" method="post" class="form-group">
 																							{% csrf_token %}
 																							<div class=" row mb-4">
 																								<label class="col-md-3 form-label">Sarlavha uz</label>
-																								<div class="col-md-9">
+																								<div class="col-md-9 col-lg-9 col-xl-9 col-sm-9">
 																									<input type="text" class="form-control" name="title_uz" placeholder="sarlavhani o`zbekcha kiriting" required>
 																								</div>
 																							</div>
 																							<div class="row mb-4">
 																								<label class="col-md-3 form-label">Sarlavha ru</label>
-																								<div class="col-md-9">
+																								<div class="col-md-9 col-lg-9 col-xl-9 col-sm-9">
 																									<input type="text" name="title_ru" class="form-control" placeholder="sarlavhani ruscha kiriting" required>
 																								</div>
 																							</div>
 																							<div class="modal-footer">
-																								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
-																								<button type="submit" class="btn btn-primary">O'zgarishlarni saqlang</button>
+																								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Orqaga</button>
+																								<button type="submit" class="btn btn-primary">Saqlash</button>
 																							</div>
 																						</form>
 																					</div>
@@ -99,15 +99,16 @@
 														</div>
 											{% endif %}
 										</div>
+									</div>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-xl-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                                 <div class="customer-services mb-2 text-center">
                                                     <h4>{{ advice_title.title_uz }}</h4>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                                 <div class="customer-services mb-2 text-center">
                                                     <h4>{{ advice_title.title_ru }}</h4>
                                                 </div>
@@ -116,123 +117,123 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12">
                                 <div class="container">
-                                    <div class="row">
-										<div class="row" style="margin-top:1%;">
-										<div class="col-10">
-											<h2 class="fw-semibold mb-7" style="margin-left:52%;">Maslahat elementlari</h2>
-										</div>
-										<div class="col-2">
-										<button type="button" style="margin-left:25%;" class="btn btn-success  btn-info-light" data-bs-target="#modaldemocreateadvice" data-bs-toggle="modal">Yangi maslahat qo'shing</button>
-											<div class="modal fade" id="modaldemocreateadvice">
-												<div class="modal-dialog" style="margin-top:10%;" role="document">
-													<div class="modal-content modal-content-demo">
-														<div class="modal-header">
-															<h6 class="modal-title">Maslahat sarlavhasini yarating</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-														</div>
-														<div class="form" style="padding:10px;">
-															<form action="{% url 'create_advice_item_url' %}" method="post" class="form-group">
-																{% csrf_token %}
-																<div class=" row mb-4">
-																	<label class="col-md-3 form-label">Sarlavha uz</label>
-																	<div class="col-md-9">
-																		<input type="text" class="form-control" name="advice_uz" placeholder="o'zbekcha maslahatlar kiriting" required>
+                                    <div class="card">
+                                    	<div class="card-header">
+											<div class="col-xl-10 col-md-10 col-sm-10 col-lg-10">
+												<h3 class="fw-semibold">Maslahat elementlari</h3>
+											</div>
+											<div class="col-xl-2 col-md-2 col-sm-2 col-lg-2">
+											<button type="button"  class="btn btn-success  btn-info-light" data-bs-target="#modaldemocreateadvice" data-bs-toggle="modal">Maslahat yaratish</button>
+												<div class="modal fade" id="modaldemocreateadvice">
+													<div class="modal-dialog" style="margin-top:10%;" role="document">
+														<div class="modal-content modal-content-demo">
+															<div class="modal-header">
+																<h6 class="modal-title">Maslahat yaratish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+															</div>
+															<div class="form" style="padding:10px;">
+																<form action="{% url 'create_advice_item_url' %}" method="post" class="form-group">
+																	{% csrf_token %}
+																	<div class=" row mb-4">
+																		<label class="col-md-3 form-label">Maslahat uz</label>
+																		<div class="col-md-9">
+																			<input type="text" class="form-control" name="advice_uz" placeholder="o'zbekcha maslahatlar kiriting" required>
+																		</div>
 																	</div>
-																</div>
-																<div class="row mb-4">
-																	<label class="col-md-3 form-label">Sarlavha ru</label>
-																	<div class="col-md-9">
-																		<input type="text" name="advice_ru" class="form-control" placeholder="ruscha maslahatlar kiriting" required>
+																	<div class="row mb-4">
+																		<label class="col-md-3 form-label">Maslahat ru</label>
+																		<div class="col-md-9 col-lg-9 col-xl-9 col-sm-9">
+																			<input type="text" name="advice_ru" class="form-control" placeholder="ruscha maslahatlar kiriting" required>
+																		</div>
 																	</div>
-																</div>
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
-																	<button type="submit" class="btn btn-primary">O'zgarishni saqlash</button>
-																</div>
-															</form>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Qaytish</button>
+																		<button type="submit" class="btn btn-primary">Saqlash</button>
+																	</div>
+																</form>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-										</div>
-                                        {% for i in advice_item %}
-                                        <div class="col-lg-6">
-                                            <div class="card" style=height:85%;">
-                                                <div class="card-body">
-                                                    <div class="d-flex">
-														<div class="col-12">
-															<div class="row" style="margin-bottom:20px;">
-																<div class="ps-3">
-																	<div class="ps-3 row" >{{ i.advice_uz }}</div>
-																</div>
-															</div>
-															<div class="row">
-																<div class="footer ps-3">
-																	<div class="ps-3 row">{{ i.advice_ru }}</div>
+										<div class="card-body">
+                                        <div class="row">
+											{% for i in advice_item %}
+												<div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
+												<div class="customer-services mb-2 text-center">
+													<div class="card-body">
+														<div class="d-flex">
+																<div class="row">
+																	<div class="ps-3 mb-4">
+																		<div class="ps-3 row" >{{ i.advice_uz }}</div>
+																	</div>
+																	<div class="footer ps-3">
+																		<div class="ps-3 row">{{ i.advice_ru }}</div>
+																	</div>
 																</div>
 															</div>
 														</div>
-                                                	</div>
-												<div class="row d-flex">
-													<div class="form d-flex">
-														<a data-bs-target="#modaldemoedit{{ i.id }}" data-bs-toggle="modal" href="">Ozgartish</a>
-															<div class="modal fade" id="modaldemoedit{{ i.id }}">
-																			<div class="modal-dialog" style="margin-top:10%;" role="document">
-																				<div class="modal-content modal-content-demo">
-																					<div class="modal-header">
-																						<h6 class="modal-title">O`zgartirish</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-																					</div>
-																					<div class="form" style="padding:10px;">
-																						<form action="{% url 'change_advice_item_url' i.id %}" method="post" class="form-group">
-																							{% csrf_token %}
-																							<div class=" row mb-4">
-																								<label class="col-md-3 form-label">Sarlavha uz</label>
-																								<div class="col-md-9">
-																									<input type="text" class="form-control" name="advice_uz" value="{{ i.advice_uz }}" placeholder="o`zbek maslahatlar kiriting" required>
-																								</div>
-																							</div>
-																							<div class=" row mb-4">
-																								<label class="col-md-3 form-label">Sarlavha uz</label>
-																								<div class="col-md-9">
-																									<input type="text" class="form-control" name="advice_ru" value="{{ i.advice_ru }}" placeholder="ruscha maslahatlar kiriting" required>
-																								</div>
-																							</div>
-																							<div class="modal-footer">
-																								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekorkilish</button>
-																								<button type="submit" class="btn btn-primary">O`zgarishni saqlash </button>
-																							</div>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-														</div>
-														<a data-bs-target="#modaldemodeleteitem" data-bs-toggle="modal" href="">O`chrish</a>
-															<div class="modal fade" id="modaldemodeleteitem">
-																			<div class="modal-dialog" style="margin-top:10%;" role="document">
-																				<div class="modal-content modal-content-demo">
-																					<div class="form">
+													<div class="row d-flex">
+														<div class="form" style="margin-left:30%;">
+															<a class="btn btn-light" data-bs-target="#modaldemoedit{{ i.id }}" data-bs-toggle="modal" href="">Ozgartish</a>
+																<div class="modal fade" id="modaldemoedit{{ i.id }}">
+																				<div class="modal-dialog" style="margin-top:10%;" role="document">
+																					<div class="modal-content modal-content-demo">
 																						<div class="modal-header">
-																							<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
+																							<h6 class="modal-title">Tahrirlash</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 																						</div>
-																						<form action="{% url 'delete_advice_item_url' i.id %}" method="post">
-																							{% csrf_token %}
-																								<div class="modal-footer">
-																								<button type="button" class="btn btn-success" data-bs-dismiss="modal">Yoq</button>
-																								<button type="submit" class="btn btn-danger">Ha</button>
+																						<div class="form" style="padding:10px;">
+																							<form action="{% url 'change_advice_item_url' i.id %}" method="post" class="form-group">
+																								{% csrf_token %}
+																								<div class=" row mb-4">
+																									<label class="col-md-3 form-label">Maslahat uz</label>
+																									<div class="col-md-9">
+																										<input type="text" class="form-control" name="advice_uz" value="{{ i.advice_uz }}" placeholder="o`zbek maslahatlar kiriting" required>
+																									</div>
 																								</div>
-																						</form>
+																								<div class=" row mb-4">
+																									<label class="col-md-3 form-label">Maslahat uz</label>
+																									<div class="col-md-9">
+																										<input type="text" class="form-control" name="advice_ru" value="{{ i.advice_ru }}" placeholder="ruscha maslahatlar kiriting" required>
+																									</div>
+																								</div>
+																								<div class="modal-footer">
+																									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Qaytish</button>
+																									<button type="submit" class="btn btn-primary">Saqlash</button>
+																								</div>
+																							</form>
+																						</div>
 																					</div>
 																				</div>
-																			</div>
+															</div>
+															<a class="btn btn-light" data-bs-target="#modaldemodeleteitem" data-bs-toggle="modal" href="">O`chrish</a>
+																<div class="modal fade" id="modaldemodeleteitem">
+																				<div class="modal-dialog" style="margin-top:10%;" role="document">
+																					<div class="modal-content modal-content-demo">
+																						<div class="form">
+																							<div class="modal-header">
+																								<h5 style="padding-top:18px; margin-left:50px;">O`chirib yuborishga aminmisiz</h5>
+																							</div>
+																							<form action="{% url 'delete_advice_item_url' i.id %}" method="post">
+																								{% csrf_token %}
+																									<div class="modal-footer">
+																									<button type="button" class="btn btn-success" data-bs-dismiss="modal">Yoq</button>
+																									<button type="submit" class="btn btn-danger">Ha</button>
+																									</div>
+																							</form>
+																						</div>
+																					</div>
+																				</div>
+															</div>
 														</div>
-														</div>
+													</div>
 												</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    	{% endfor %}
+											</div>
+											{% endfor %}
+										</div>
+										</div>
                                 </div>
                             </div>
                         </div>

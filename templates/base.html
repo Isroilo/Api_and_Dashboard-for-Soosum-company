@@ -40,13 +40,6 @@
 </head>
 
     <body class="app sidebar-mini ltr light-mode">
-
-        <!-- GLOBAL-LOADER -->
-        <div id="global-loader">
-            <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
-        </div>
-        <!-- /GLOBAL-LOADER -->
-
         <!-- PAGE -->
         <div class="page">
             <div class="page-main">
@@ -55,12 +48,9 @@
                 <div class="app-header header sticky">
                     <div class="container-fluid main-container">
                         <div class="d-flex">
+                            <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
                             <!-- sidebar-toggle-->
-                            <a class="logo-horizontal " href="{% url 'home_url' %}">
-                                <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                                <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
-                                    alt="logo">
-                            </a>
+                            <a class="logo-horizontal " href="{% url 'home_url' %}"></a>
                             <!-- LOGO -->
                             <div class="main-header-center ms-3 d-none d-lg-block">
                                 <form action="{% url 'search_url' %}" method="post">
@@ -146,11 +136,11 @@
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'home_url' %}"><i
                                         class="side-menu__icon fe fe-home"></i><span
-                                        class="side-menu__label">Boshqaruv paneli</span></a>
+                                        class="side-menu__label">Dashboard</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'order_url' %}"><i class="icon icon-people"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Buyurtma</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">Order</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'banner_url' %}"><i class="side-menu__icon fe fe-slack"></i>
@@ -158,31 +148,31 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'product_url' %}"><i class="icon icon-basket-loaded"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Mahsulotlar</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">Products</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'advice_url' %}"><i class="icon icon-book-open fe fe-book-open"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Maslahat</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">Advice</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'instruction_url' %}"><i class="icon icon-docs"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Ko'rsatma</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">Instruction</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'about_product_url' %}"><i class="icon icon-list"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Mahsulot haqida</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">About Product</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'about_company_url' %}"><i class="icon-drawer"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Kompaniya haqida</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">About Company</span></a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'fact_url' %}"><i class="icon icon-chart"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Fakt</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">Fact</span></a>
                             </li>
                              <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'info_url' %}"><i class="icon icon-info"></i>
-                                    <span style="margin-left:10px;" class="side-menu__label">Ma'lumot</span></a>
+                                    <span style="margin-left:10px;" class="side-menu__label">Info</span></a>
                             </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"

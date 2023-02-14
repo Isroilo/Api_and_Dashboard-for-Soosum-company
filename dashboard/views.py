@@ -96,17 +96,35 @@ def search_view(request):
     if request.method == "POST":
         search = request.POST['search']
         info = Q(Q(name_uz__icontains=search) | Q(name_ru__icontains=search))
-        product = Product.objects.filter(info)
+        products = Product.objects.filter(info)
         context = {
-            "search": product
+            "search": products
         }
-        return render(request, 'search.html', context)
+    return render(request, 'search.html', context)
 
+def PagenatorPage(List, num ,request):
+    paginator = Paginator(List, num)
+    pages = request.GET.get('page')
+    try:
+        list = paginator.page(pages)
+    except PageNotAnInteger:
+        list = paginator.page(1)
+    except EmptyPage:
+        list = paginator.page(paginator.num_pages)
+    return list
+
+@login_required(login_url='login_url')
+def search_order(request):
+    search = request.GET.get('order_search')
+    info = Q(Q(name__icontains=search) | Q(phone__icontains=search) | Q(created__icontains=search))
+    orders = Order.objects.filter(info)
+    context = {
+        "orders": PagenatorPage(orders, 5, request)
+    }
+    return render(request, 'order.html', context)
 
 """ End Search """
 """ Banner """
-
-
 @login_required(login_url='login_url')
 def banner_view(request):
     context = {
@@ -130,7 +148,6 @@ def create_banner(request):
             quality_ru=quality_ru,
             photo=photo,
         )
-        return redirect("banner_url")
     return redirect("banner_url")
 
 
@@ -157,13 +174,11 @@ def change_banner(request, pk):
         if photo is not None:
             banner.photo = photo
         banner.save()
-        return redirect("banner_url")
     return redirect("banner_url")
 
 
 """ End Banner """
 """ Order """
-
 def PagenatorPage(List, num ,request):
     paginator = Paginator(List, num)
     pages = request.GET.get('page')
@@ -174,7 +189,6 @@ def PagenatorPage(List, num ,request):
     except EmptyPage:
         list = paginator.page(paginator.num_pages)
     return list
-
 @login_required(login_url='login_url')
 def order_view(request):
     orders = Order.objects.all().order_by('-id')
@@ -217,8 +231,6 @@ def change_order(request, pk):
 
 """ End Order"""
 """ Product """
-
-
 def PagenatorPage(List, num ,request):
     paginator = Paginator(List, num)
     pages = request.GET.get('page')
@@ -633,7 +645,6 @@ def create_info(request):
             youtube=youtube,
             facebook=facebook,
             )
-        return redirect("info_url")
     return redirect("info_url")
 
 
@@ -646,11 +657,8 @@ def delete_info(request, pk):
 
 @login_required(login_url='login_url')
 def change_info(request, pk):
-    info = Info.objects.get(pk=pk)
-    context = {
-        "info": info
-    }
     if request.method == 'POST':
+        info = Info.objects.get(pk=pk)
         name = request.POST.get('name')
         logo = request.FILES.get('logo')
         description_uz = request.POST.get('description_uz')
@@ -660,17 +668,15 @@ def change_info(request, pk):
         youtube = request.POST.get('youtube')
         facebook = request.POST.get('facebook')
         info.name = name
-        if logo is not None:
-            info.logo = logo
         info.description_uz = description_uz
         info.description_ru = description_ru
         info.telegram = telegram
         info.instagram = instagram
         info.youtube = youtube
         info.facebook = facebook
+        if logo is not None:
+            info.logo = logo
         info.save()
-        return redirect("info_url")
-
     return redirect("info_url")
 
 

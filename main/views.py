@@ -27,7 +27,7 @@ def about_company_view(request):
         serializer = About_Company(about_company)
         return Response(serializer.data)
     except:
-        return Response({'message': 'None'})
+        return Response({'message': False})
 
 
 @api_view(['GET'])
@@ -61,16 +61,23 @@ def advice_item_view(request):
     serializer = Advice_itemSerializer(advices, many=True)
     return Response(serializer.data)
 
+
+import datetime
 @api_view(['POST'])
 def order_add(request):
-    name = request.POST['name']
-    phone = request.POST['phone']
-    new_order = Order.objects.create(
-        name=name,
-        phone=phone,
-    )
-    serializer = OrderSerializer(new_order)
-    return Response(serializer.data)
+    name = request.data['name']
+    phone = request.data['phone']
+    print(phone)
+    for i in phone:
+        print(i['number'])
+    # new_order = Order.objects.create(
+    #     name=name,
+    #     phone=phone,
+    #     created=datetime.datetime.now()
+    # )
+    # serializer = OrderSerializer(new_order)
+    return Response('serializer.data')
+
 
 @api_view(['GET'])
 def instruction_view(request):

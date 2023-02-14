@@ -13,8 +13,7 @@ class Banner(models.Model):
 class Order(models.Model):
     name = models.CharField(max_length=100)
     phone = PhoneField(help_text='Contact phone number')
-    created = models.DateTimeField()
-
+    created = models.DateTimeField(auto_now=True)
 
 
 

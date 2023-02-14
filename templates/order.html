@@ -1,23 +1,32 @@
 {% extends 'base.html'%}
 {% block content %}
        <!-- Row -->
-      <div class="row">
-            <div class="col-xl-6" style="margin-left:20%;margin-top:2%;">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Klient Jadvali</h3>
+      <div class="main-content app-content mt-0">
+            <div class="main-container container-fluid">
+                <div class="card col-xl-12 col-sm-12 col-lg-12 col-md-12">
+                    <div class="card-header row">
+                        <div class="col-xl-4 col-sm-12 col-lg-4 col-md-4">
+                            <h3 class="card-title">Klient Jadvali</h3>
+                        </div>
+                        <div class="col-xl-8 col-sm-12 col-lg-8 col-md-8" align="right">
+                           <a class="btn btn-success" href="{% url 'export_write_xls' %}"><i class="fa fa-file-excel-o"></i> Export Exsel</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-9">
+                            <div class="col-xl-8 col-sm-12 col-lg-8 col-md-8">
                             <p>Bu yerda barcha clientlar royhati</p>
                             </div>
-                            <div class="col-3">
-                            <a style="margin-left:15%;margin-bottom:10%;" class="btn btn-success float-right mt-n1" href="{% url 'export_write_xls' %}"><i style="margin-right:5%;" class="fa fa-file-excel-o"></i> Export Excel</a>
+                            <div class="col-xl-4 col-sm-12 col-lg-4 col-md-4" align="right">
+                            <form class="form d-flex mb-5" action="{% url 'search_order_url' %}">
+                                {% csrf_token %}
+                                <input type="text" class="form-control" name="order_search" placeholder="Qidiruv..." required>
+                                <button type="submit" class="btn px-0 pt-2"><i class="fe fe-search"></i></button>
+                            </form>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
+                            <table class="table table-bordered text-nowrap key-buttons border-bottom">
                                 <thead>
                                     <tr class="text-center">
                                         <th>ID</th>
@@ -70,6 +79,7 @@
 							{% endif %}
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
       </div>
